@@ -1,0 +1,19 @@
+<header class="header">
+  <nav class="header__nav">
+    <a href="{{ path('app_main') }}" class="header__brand">Habito</a>
+    <div class="header__menu">
+      {% if app.user %}
+        <a href="{{ path('app_logout') }}" class="header__logout">
+          <i class="fas fa-sign-out-alt"></i>
+          Logout
+        </a>
+      {% else %}
+        <a href="{{ path('app_login') }}" class="header__login">
+          <i class="fas fa-sign-in-alt"></i>
+          Login
+        </a>
+      {% endif %}
+    </div>
+  </nav>
+</header>
+
