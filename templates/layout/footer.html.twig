@@ -1,10 +1,52 @@
 <footer class="footer">
   <div class="footer__content">
-    <p class="footer__copyright">© {{ "now"|date("Y") }} Habito</p>
-    <ul class="footer__links">
-      <li><a href="#">Privacy</a></li>
-      <li><a href="#">Terms</a></li>
-      <li><a href="#">Contact</a></li>
+    <div class="footer__content--right">
+      <h1>
+        <i class="bi bi-check-lg"></i>
+        habito 
+      </h1>
+      <p>Habit tracking application designed to help you build and maintain positive habits. Track your progress and achieve your goals.</p>
+    </div>
+    <div class="footer__content--left">
+      <div>
+        <h2>PROJECT INFO</h2>
+        <ul>
+          <li><a href="#" target="_blank">About This Project</a></li>
+          <li><a href="#" target="_blank">Source Code</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>CONTACT</h2>
+        <ul>
+          <li>
+          <a href="mailto:basia.zygilewicz@gmail.com">
+            <i class="bi bi-envelope"></i>
+            <span>Email Me</span> 
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/basia11111" target="_blank">
+            <i class="bi bi-github"></i>
+            <span>Visit My GitHub</span>
+          </a>
+        </li>
+      </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer__techStack">
+    <h2>BUILT WITH</h2>
+    <ul>
+      <li><a href="#">PHP 8.2</a></li>
+      <li><a href="#">Symfony 7.2</a></li>
+      <li><a href="#">SCSS</a></li>
+      <li><a href="#">Bootstrap 5</a></li>
     </ul>
+  </div>
+
+  <div class="footer__copyright">
+    <span>© {{ "now"|date("Y") }} • For Demonstration Purposes</span>
+    <span>Built by Barbara Żygilewicz</span>
   </div>
 </footer>

@@ -1,0 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+@import "../../node_modules/bootstrap-icons/font/bootstrap-icons.scss";
+@import "colors";
+@import "fonts";
+@import "layout";
+@import "common-styles";
+@import "header";
+@import "footer";
+
+body main {
+  font-family: "Inter" sans-serif !important;
+  background-color: $bg-gray !important;
+  min-height: 100vh !important;
+}
+
+i.bi {
+  font-family: "Bootstrap Icons" !important;
+}

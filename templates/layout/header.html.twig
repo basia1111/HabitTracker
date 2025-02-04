@@ -1,16 +1,25 @@
 <header class="header">
   <nav class="header__nav">
-    <a href="{{ path('app_main') }}" class="header__brand">Habito</a>
+    <a href="{{ path('app_main') }}" class="header__brand">
+      <i class="bi bi-check-lg"></i>
+      habito
+    </a>
     <div class="header__menu">
       {% if app.user %}
+        <div class="header__user">
+          <p class="header__user--label">User</p>
+          <p class="header__user--content">{{app.user.email}}</p>
+        </div>
         <a href="{{ path('app_logout') }}" class="header__logout">
-          <i class="fas fa-sign-out-alt"></i>
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
           Logout
         </a>
       {% else %}
         <a href="{{ path('app_login') }}" class="header__login">
-          <i class="fas fa-sign-in-alt"></i>
           Login
+        </a>
+        <a href="{{ path('app_register') }}" class="header__register">
+          Register
         </a>
       {% endif %}
     </div>

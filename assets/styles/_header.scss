@@ -1,0 +1,71 @@
+.header__nav {
+  padding: 24px 32px;
+  @include flex(row, space-between, center);
+  background-color: $bg-white;
+  border-bottom: 1px solid $border-card;
+}
+.header__brand {
+  @include responsive-font-size($font-size-20, $font-size-16);
+  @include flex(row, start, center, 10px);
+  @extend %link-styles;
+  color: $accent-dark;
+  font-weight: 800;
+  i {
+    @include responsive-font-size($font-size-24, $font-size-20);
+  }
+}
+.header__menu {
+  @include flex(row, end, center, 10px);
+
+  .header__user {
+    @include responsive-font-size($font-size-14, $font-size-14);
+    padding-right: 30px;
+    @media (max-width: 767px) {
+      display: none;
+    }
+    .header__user--label {
+      color: $text-primary-dark;
+      font-weight: 600;
+      margin: 0;
+      text-align: right;
+    }
+    .header__user--content {
+      color: $text-secondary-dark;
+      margin: 0;
+      text-align: right;
+    }
+  }
+
+  .header__logout {
+    @extend %link-styles;
+    @include responsive-font-size($font-size-16, $font-size-14);
+    background-color: $bg-white;
+    color: $text-secondary-dark;
+    font-weight: 600;
+    &:hover {
+      color: $text-helper;
+    }
+  }
+  .header__login {
+    @extend %button-styles;
+    @extend %link-styles;
+    @include responsive-font-size($font-size-16, $font-size-14);
+    background-color: $bg-white;
+    color: $text-secondary-dark;
+    border: 1px solid $border-card;
+    &:hover {
+      background-color: $bg-gray;
+    }
+  }
+  .header__register {
+    @extend %button-styles;
+    @extend %link-styles;
+    @include responsive-font-size($font-size-16, $font-size-14);
+    background-color: $accent-dark;
+    color: $text-white;
+    margin-left: 12px;
+    &:hover {
+      background-color: $accent-dark-hover;
+    }
+  }
+}

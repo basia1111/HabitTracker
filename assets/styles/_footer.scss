@@ -1,0 +1,57 @@
+.footer {
+  @include responsive-font-size($font-size-14, $font-size-14);
+  padding: 40px 32px;
+  background-color: $bg-dark;
+  margin-top: 60px;
+  color: $text-secondary-light;
+
+  h1 {
+    @include responsive-font-size($font-size-20, $font-size-16);
+    color: $text-white;
+    font-weight: 800;
+    padding-bottom: 20px;
+  }
+  h2 {
+    @include responsive-font-size($font-size-16, $font-size-14);
+    font-weight: 600;
+    padding-bottom: 20px;
+  }
+  p {
+    @include responsive-font-size($font-size-16, $font-size-14);
+    max-width: 30%;
+    @media (max-width: 767px) {
+      max-width: 100%;
+    }
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  a {
+    @extend %link-styles;
+    color: $text-secondary-light;
+    &:hover {
+      color: $text-helper;
+    }
+  }
+}
+.footer__content,
+.footer__content--left {
+  @include flex(row, space-between, top, 30px);
+}
+.footer__techStack {
+  padding: 30px 0;
+  ul {
+    @include flex(row, start, center, 15px);
+    a {
+      background-color: #1f2937;
+      padding: 6px 15px;
+      border-radius: 50px;
+    }
+  }
+}
+.footer__copyright {
+  color: $text-helper;
+  @include responsive-font-size($font-size-14, $font-size-14);
+  @include flex(row, space-between, top, 30px);
+}

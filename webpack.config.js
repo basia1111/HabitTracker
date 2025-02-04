@@ -6,8 +6,12 @@ Encore.setOutputPath("public/build/")
   .enableSingleRuntimeChunk()
   .addEntry("app", "./assets/app.js")
   .addStyleEntry("bootstrap-css", "bootstrap/dist/css/bootstrap.min.css")
-  .addStyleEntry("app-css", "./assets/styles/app.sass")
-  .enableSassLoader()
+  .addStyleEntry("app-css", "./assets/styles/app.scss")
+  .enableSassLoader((options) => {
+    options.sassOptions = {
+      indentedSyntax: false,
+    };
+  })
 
   .autoProvidejQuery();
 
