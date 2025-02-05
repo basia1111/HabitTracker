@@ -1,9 +1,49 @@
 %button-styles {
+  @include flex(row, center, center, 10px);
+  @include responsive-font-size($font-size-16, $font-size-14);
   padding: 12px 24px;
   border-radius: 5px;
   transition: all 0.2s ease-in-out;
 }
+
+%button-light-styles {
+  @extend %button-styles;
+  background-color: $bg-white;
+  border: 1px solid $border-input;
+  color: $text-secondary-dark;
+  &:hover {
+    background-color: $bg-gray;
+  }
+}
+
+%button-dark-styles {
+  @extend %button-styles;
+  background-color: $accent-dark;
+  color: $text-white;
+  border: none;
+  &:hover {
+    background-color: $accent-dark-hover;
+  }
+}
 %link-styles {
   text-decoration: none;
   transition: all 0.2s ease-in-out;
+}
+%action-link-styles {
+  @extend %link-styles;
+  font-weight: 500;
+  color: $text-secondary-dark;
+  &:hover {
+    color: $text-helper;
+  }
+}
+%card-style {
+  background-color: $bg-white;
+  border: 1px solid $border-card;
+  border-radius: 10px;
+}
+
+%text-muted {
+  @include responsive-font-size($font-size-14, $font-size-14);
+  color: $text-helper;
 }

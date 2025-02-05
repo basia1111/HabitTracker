@@ -3,7 +3,7 @@ $font-size-16: 1rem; // 16px
 $font-size-18: 1.125rem; // 18px
 $font-size-20: 1.25rem; // 20px
 $font-size-24: 1.5rem; // 24px
-
+$font-size-32: 2rem; // 24px
 @mixin responsive-font-size($size, $smaller-size) {
   font-size: $size;
 

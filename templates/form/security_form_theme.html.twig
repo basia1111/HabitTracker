@@ -1,0 +1,9 @@
+{% use 'bootstrap_5_layout.html.twig' %}
+
+{% block form_row %}
+<div class="form-floating mb-3">
+    {{ form_widget(form, {'attr': {'class': 'form-control securityForm__input'}}) }}
+    {{ form_label(form, null, {'label_attr': {'class': 'securityForm__label'}})}}
+    {{ form_errors(form) }}
+</div>
+{% endblock %}

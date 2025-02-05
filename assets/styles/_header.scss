@@ -37,35 +37,16 @@
   }
 
   .header__logout {
-    @extend %link-styles;
-    @include responsive-font-size($font-size-16, $font-size-14);
-    background-color: $bg-white;
-    color: $text-secondary-dark;
-    font-weight: 600;
-    &:hover {
-      color: $text-helper;
-    }
+    @extend %action-link-styles;
   }
+
   .header__login {
-    @extend %button-styles;
+    @extend %button-light-styles;
     @extend %link-styles;
-    @include responsive-font-size($font-size-16, $font-size-14);
-    background-color: $bg-white;
-    color: $text-secondary-dark;
-    border: 1px solid $border-card;
-    &:hover {
-      background-color: $bg-gray;
-    }
   }
+
   .header__register {
-    @extend %button-styles;
+    @extend %button-dark-styles;
     @extend %link-styles;
-    @include responsive-font-size($font-size-16, $font-size-14);
-    background-color: $accent-dark;
-    color: $text-white;
-    margin-left: 12px;
-    &:hover {
-      background-color: $accent-dark-hover;
-    }
   }
 }

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+    <div class="security login" >
+        <div class="security__wrapper" >
+            <h1>Welcome back</h1>
+            <p>Enter your credentials to access your account.</p>
+            {% include 'security/google_auth.html.twig' %}
+            {% include 'security/login/login.html.twig' %}
+            <p class="security__bottomLink"> 
+                Don't have an account? <a href='{{path("app_register")}}'> Sign up</a> 
+            </p>
+        </div>
+    </div>
+{% endblock %}

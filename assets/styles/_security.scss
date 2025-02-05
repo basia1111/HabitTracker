@@ -1,0 +1,92 @@
+.security {
+  @include flex(row, center, center);
+  padding: 50px 20px;
+  min-height: 60vh;
+}
+
+.security__wrapper {
+  @include flex(column, center, stretch);
+  @extend %card-style;
+  max-width: 500px;
+  width: 100%;
+  padding: 24px;
+}
+
+.security__wrapper h1 {
+  @include responsive-font-size($font-size-32, $font-size-20);
+  text-align: center;
+  color: $text-primary-dark;
+}
+
+.security__wrapper h1 + p {
+  @include responsive-font-size($font-size-16, $font-size-14);
+  text-align: center;
+  color: $text-helper;
+}
+
+.securityForm__input {
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  border-color: $border-input !important;
+  &:focus {
+    border-color: $border-input-focus !important;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1) !important;
+  }
+}
+
+input.securityForm__input + label {
+  color: #bfc3ca !important;
+}
+
+.securityForm__submit {
+  @extend %button-dark-styles;
+  width: 100%;
+}
+
+.security__bottomLink {
+  @extend %text-muted;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.security__bottomLink a {
+  @extend %action-link-styles;
+}
+
+.googleAuth {
+  width: 100%;
+}
+
+.googleAuth__button {
+  @extend %button-light-styles;
+  @extend %link-styles;
+  width: 100%;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
+.googleAuth__divider {
+  margin: 20px 0;
+  height: 40px;
+  position: relative;
+}
+
+.googleAuth__divider div {
+  position: absolute;
+  width: 100%;
+  border-top: 1px solid $text-helper;
+  opacity: 0.5;
+  height: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.googleAuth__divider p {
+  @extend %text-muted;
+  position: absolute;
+  top: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 0 10px;
+  background-color: $bg-white;
+}
