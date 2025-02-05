@@ -90,3 +90,14 @@ input.securityForm__input + label {
   padding: 0 10px;
   background-color: $bg-white;
 }
+
+.security__forgot-password {
+  @extend %action-link-styles;
+  @include responsive-font-size($font-size-14, $font-size-14);
+  color: $text-primary-dark !important;
+  font-weight: 500;
+  display: block;
+  width: 100%;
+  text-align: right;
+  padding-bottom: 20px;
+}

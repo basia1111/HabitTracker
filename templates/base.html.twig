@@ -15,12 +15,16 @@
     
     </head>
     <body>
+      
         <main class="main">
-            {% include 'layout/header.html.twig' %}
+         {% include 'layout/header.html.twig' %}
+            <div class="main__wrapper">
             {% block body %}
             {% endblock %}
-            {% include 'layout/footer.html.twig' %}
+            </div>
+        {% include 'layout/footer.html.twig' %}
         </main>
+       
         {% block javascripts %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}

@@ -7,13 +7,21 @@
 @import "header";
 @import "footer";
 @import "security";
+@import "reset-password";
 
 body main {
   font-family: "Inter" sans-serif !important;
   background-color: $bg-gray !important;
-  min-height: 100vh !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
+.main__wrapper {
+  max-width: 1320px;
+  width: 100%;
+  min-height: 60vh !important;
+  padding: 15px;
+}
 i.bi {
   font-family: "Bootstrap Icons" !important;
 }

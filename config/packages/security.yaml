@@ -43,12 +43,9 @@ security:
   access_control:
     - { path: ^/login, roles: PUBLIC_ACCESS }
     - { path: ^/register, roles: PUBLIC_ACCESS }
-    - { path: ^/mail, roles: PUBLIC_ACCESS }
-    - { path: ^/hero, roles: PUBLIC_ACCESS }
-    - { path: ^/about, roles: PUBLIC_ACCESS }
-    - { path: ^/blog, roles: PUBLIC_ACCESS }
-    - { path: ^/how, roles: PUBLIC_ACCESS }
-    #- { path: ^/, roles: ROLE_USER }
+    - { path: ^/reset-password/*, roles: PUBLIC_ACCESS }
+    - { path: ^/connect/*, roles: PUBLIC_ACCESS }
+    - { path: ^/, roles: ROLE_USER }
 
 # Keep this part as is
 when@test:

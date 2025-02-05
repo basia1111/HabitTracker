@@ -1,3 +1,6 @@
+.header {
+  width: 100%;
+}
 .header__nav {
   padding: 24px 32px;
   @include flex(row, space-between, center);
@@ -37,16 +40,35 @@
   }
 
   .header__logout {
-    @extend %action-link-styles;
+    @extend %link-styles;
+    @include responsive-font-size($font-size-16, $font-size-14);
+    background-color: $bg-white;
+    color: $text-secondary-dark;
+    font-weight: 600;
+    &:hover {
+      color: $text-helper;
+    }
   }
-
   .header__login {
-    @extend %button-light-styles;
+    @extend %button-styles;
     @extend %link-styles;
+    @include responsive-font-size($font-size-16, $font-size-14);
+    background-color: $bg-white;
+    color: $text-secondary-dark;
+    border: 1px solid $border-card;
+    &:hover {
+      background-color: $bg-gray;
+    }
   }
-
   .header__register {
-    @extend %button-dark-styles;
+    @extend %button-styles;
     @extend %link-styles;
+    @include responsive-font-size($font-size-16, $font-size-14);
+    background-color: $accent-dark;
+    color: $text-white;
+    margin-left: 12px;
+    &:hover {
+      background-color: $accent-dark-hover;
+    }
   }
 }
