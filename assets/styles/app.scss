@@ -12,7 +12,8 @@
 @import "layout/footer";
 @import "layout/header";
 
-@import "dashboard/hashboard-header";
+@import "dashboard/dashboard-header";
+@import "dashboard/dashboard-stats";
 
 body main {
   font-family: "Inter" sans-serif !important;
