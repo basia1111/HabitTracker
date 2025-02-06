@@ -1,0 +1,37 @@
+.googleAuth {
+  width: 100%;
+}
+
+.googleAuth__button {
+  @extend %button-light-styles;
+  @extend %link-styles;
+  width: 100%;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
+.googleAuth__divider {
+  margin: 20px 0;
+  height: 40px;
+  position: relative;
+
+  div {
+    position: absolute;
+    width: 100%;
+    border-top: 1px solid $text-helper;
+    opacity: 0.5;
+    height: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  p {
+    @extend %text-muted;
+    position: absolute;
+    top: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: 0 10px;
+    background-color: $bg-white;
+  }
+}

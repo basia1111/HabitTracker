@@ -1,6 +1,4 @@
-import "./bootstrap.js";
-import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
-import "bootstrap"; // Import Bootstrap JS
+import "bootstrap/dist/js/bootstrap.bundle.min.js"; // Bootstrap JS (with Popper)
+import "bootstrap/dist/css/bootstrap.min.css"; // Bootstrap CSS
 
-// Your custom JS here
-console.log("jQuery and Bootstrap are loaded.");
+console.log("Bootstrap JS and CSS are loaded.");

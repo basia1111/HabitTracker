@@ -1,3 +1,12 @@
+@mixin flex($direction, $justify, $align, $gap: 10px, $wrap: wrap) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  gap: $gap;
+  flex-wrap: $wrap;
+}
+
 %button-styles {
   @include flex(row, center, center, 10px);
   @include responsive-font-size($font-size-16, $font-size-14);
@@ -46,4 +55,11 @@
 %text-muted {
   @include responsive-font-size($font-size-14, $font-size-14);
   color: $text-helper;
+}
+
+%h1-style {
+  @include responsive-font-size($font-size-32, $font-size-24);
+  color: $text-primary-dark;
+  font-weight: 600;
+  padding-bottom: 20px;
 }

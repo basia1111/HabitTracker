@@ -1,13 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
 @import "../../node_modules/bootstrap-icons/font/bootstrap-icons.scss";
+
 @import "colors";
 @import "fonts";
-@import "layout";
 @import "common-styles";
-@import "header";
-@import "footer";
-@import "security";
-@import "reset-password";
+
+@import "security/google-auth";
+@import "security/reset-password";
+@import "security/singIn-signUp";
+
+@import "layout/footer";
+@import "layout/header";
+
+@import "dashboard/hashboard-header";
 
 body main {
   font-family: "Inter" sans-serif !important;
@@ -21,7 +26,4 @@ body main {
   width: 100%;
   min-height: 60vh !important;
   padding: 15px;
-}
-i.bi {
-  font-family: "Bootstrap Icons" !important;
 }
