@@ -1,0 +1,125 @@
+.habit {
+  @extend %card-style;
+  @include shadow();
+  @include flex(row, start, center, 20px);
+  position: relative;
+  padding: 15px 30px 15px 15px;
+}
+
+.habit__color {
+  width: 4px;
+  height: 48px;
+  border-radius: 10px;
+}
+
+.color_0 {
+  background-color: #ffffff;
+}
+.color_1 {
+  background-color: #a4bdfc;
+}
+.color_2 {
+  background-color: #7ae7bf;
+}
+.color_3 {
+  background-color: #dbadff;
+}
+.color_4 {
+  background-color: #ff887c;
+}
+.color_5 {
+  background-color: #fbd75b;
+}
+.color_6 {
+  background-color: #ffb878;
+}
+.color_7 {
+  background-color: #46d6db;
+}
+.color_8 {
+  background-color: #e1e1e1;
+}
+.color_9 {
+  background-color: #5484ed;
+}
+.color_10 {
+  background-color: #51b749;
+}
+.color_11 {
+  background-color: #dc2127;
+}
+
+.habit__checkbox {
+  width: 23px;
+  height: 23px;
+  border: 1px solid $text-helper;
+  border-radius: 2px;
+}
+
+.habit__data--title {
+  font-weight: 600;
+}
+.habit__data--reocurance,
+.habit__data--time,
+.habit__data--streak {
+  @extend %text-muted;
+}
+
+.habit__actions {
+  position: absolute;
+  right: 15px;
+  color: $text-helper;
+  cursor: pointer;
+  &:hover {
+    color: $accent-dark;
+  }
+}
+
+.habit__action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  color: $text-helper;
+  border-radius: 4px;
+  padding: 5px;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    background-color: $text-primary-light;
+  }
+}
+
+/*today*/
+.today .habit__data--title {
+  @include responsive-font-size($font-size-16, $font-size-14);
+}
+
+/*all*/
+.all.habit {
+  justify-content: space-between;
+  align-items: start;
+  padding: 15px 15px 15px 45px;
+}
+.all .habit__color {
+  position: absolute;
+  left: 15px;
+  height: 72px;
+}
+.habit__data--title {
+  @include responsive-font-size($font-size-18, $font-size-16);
+}
+.habit__data--wrapper {
+  @include flex(row, start, center, 20px);
+  padding-top: 10px;
+}
+.all .habit__data--category {
+  @include flex(row, space-between, center, 20px);
+  color: $text-secondary-dark;
+}
+
+.all .habit__actions {
+  position: relative;
+  display: flex;
+}

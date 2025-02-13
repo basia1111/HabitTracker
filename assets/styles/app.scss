@@ -4,6 +4,7 @@
 @import "colors";
 @import "fonts";
 @import "common-styles";
+@import "modal";
 
 @import "security/google-auth";
 @import "security/reset-password";
@@ -12,8 +13,12 @@
 @import "layout/footer";
 @import "layout/header";
 
-@import "dashboard/dashboard-header";
-@import "dashboard/dashboard-stats";
+@import "dashboard/header";
+@import "dashboard/stats";
+@import "dashboard/today-habits";
+@import "dashboard/all-habits";
+@import "dashboard/habit";
+@import "dashboard/habit-form";
 
 body main {
   font-family: "Inter" sans-serif !important;
@@ -27,4 +32,15 @@ body main {
   width: 100%;
   min-height: 60vh !important;
   padding: 15px;
+}
+
+/*resets*/
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+ul {
+  margin: 0;
 }

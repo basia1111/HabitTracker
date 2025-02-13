@@ -14,33 +14,33 @@ class Habit
     #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
-
-    #[ORM\Column(type: 'time')]
-    private ?\DateTimeInterface $time = null;  
-
-    #[ORM\Column(type: 'integer')]
-    private int $duration;  
-
-    #[ORM\Column(type: 'text', nullable: true)]
-    private ?string $description = null; 
-
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
+
+    #[ORM\Column(type: 'time',  nullable: true)]
+    private ?\DateTimeInterface $time = null;  
+
+    #[ORM\Column(type: 'string', length: 50, nullable: true)]
+    private ?string $color = null;
+
     #[ORM\Column(type: 'string', length: 50)]
-    private string $frequency;  
+    private ?string $frequency = null;
 
     #[ORM\Column(type: 'array', nullable: true)]
-    private ?array $weekDays = null;  
+    private ?array $weekDays = null;
 
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $googleRecurrenceRule = null;  
 
     #[ORM\Column(type: 'datetime')]
     private ?\DateTimeInterface $createdAt = null;
+
+    #[ORM\Column(type: 'integer')]
+    private ?int $streak = 0;
 
     #[ORM\Column(type: 'array')]
     private array $completions = [];  
@@ -91,11 +91,26 @@ class Habit
         $this->createdAt = $createdAt; return $this; 
     }
 
-    public function getFrequency(): string { 
+    public function getFrequency(): ?string { 
         return $this->frequency; 
     }
     public function setFrequency(string $frequency): self { 
         $this->frequency = $frequency; return $this;
+    }
+    public function getColor(): ?string { 
+        return $this->color; 
+    }
+    public function setColor(string $color): self { 
+        $this->color = $color; 
+        return $this;
+    }
+
+    public function getStreak(): ?string { 
+        return $this->streak; 
+    }
+    public function setStreak(string $color): self { 
+        $this->streak = $streak; 
+        return $this;
     }
 
     public function getWeekDays(): ?array { 

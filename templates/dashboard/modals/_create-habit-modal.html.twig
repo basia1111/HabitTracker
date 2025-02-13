@@ -1,18 +1,34 @@
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="createHabitModal" tabindex="-1" aria-labelledby="createHabitModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h2>Add Habit</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closeCreateHabitModal"></button>
       </div>
       <div class="modal-body">
-        <!-- Modal content goes here -->
-        This is the body of the modal.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <div id="createHabitError" class="mt-2"></div>
+        <form id="habit-create-form" method="post">
+          {% form_theme createHabitForm 'form/habit_form_theme.html.twig' %}
+          {{ form_errors(createHabitForm) }}
+          {{ form_start(createHabitForm) }}
+
+          {{ form_row(createHabitForm.name) }}
+          
+          <label for="habit_form_time">Time</label>
+          {{ form_row(createHabitForm.time) }}
+          
+          <label for="habit_form_frequency">Frequency</label>
+          {{ form_row(createHabitForm.frequency) }}
+          
+          {{ form_row(createHabitForm.weekDays) }}
+          
+          <label for="habit_form_color">Color</label>
+          {{ form_row(createHabitForm.color) }}
+          
+          <button type="submit" class="securityForm__submit">Create</button>
+
+          {{ form_end(createHabitForm) }}
+        </form>
       </div>
     </div>
   </div>

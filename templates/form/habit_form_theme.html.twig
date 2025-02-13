@@ -1,0 +1,11 @@
+{% use 'bootstrap_5_layout.html.twig' %}
+
+{% block form_row %}
+<div class=" mb-3">
+    {{ form_label(form, null, {'label_attr': {'class': 'habitForm__label'}})}}
+    {{ form_widget(form, {'attr': {'class': 'habitForm__input'}}) }}
+    
+    {{ form_errors(form) }}
+</div>
+{% endblock %}
+

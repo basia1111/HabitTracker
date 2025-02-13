@@ -1,0 +1,14 @@
+.modal-content {
+  padding: 20px;
+}
+.modal-content .modal-header {
+  @include flex(row, space-between, center, 10px);
+  border: none;
+}
+
+.modal-content h2 {
+  @include responsive-font-size($font-size-24, $font-size-20);
+  padding: 0 !important;
+  padding-bottom: 20px;
+  font-weight: 700;
+}

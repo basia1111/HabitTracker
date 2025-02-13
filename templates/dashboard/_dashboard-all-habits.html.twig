@@ -1,0 +1,14 @@
+<div class="dashboard-all">
+    <h1> All habits </h1>
+
+    <div id="dashboard-all-list">
+    {% if habits|length > 0 %}
+        {% for habit in habits %}
+            {% include "dashboard/_dashboard-all-habit.html.twig" with {'habit': habit} %}
+        {% endfor %}
+
+    {% else %}
+        <p>No habits found.</p>
+    {% endif %}
+    </div>
+</div>

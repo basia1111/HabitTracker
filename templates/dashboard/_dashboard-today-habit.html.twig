@@ -1,0 +1,20 @@
+ <div class="habit today">
+    <div class="habit__color" > </div>
+    <div class="habit__checkbox" > </div>
+    <div class="habit__data" > 
+        <p class="habit__data--title" > Monrning meditation </p>
+        <p class="habit__data--time" > 6:00 AM </p>
+    </div>
+    <a tabindex="0" role="button" 
+        class="habit__actions" 
+        data-bs-toggle="popover" 
+        data-bs-trigger="focus" 
+        data-bs-placement="left"
+        title=""
+        data-bs-content="
+            <a class='habit__action' href='{{path('app_main')}}'><i class='fa-regular fa-pen-to-square'></i></a>
+            <a class='habit__action'href='{{path('app_main')}}' ><i class='fa-regular fa-trash-can'></i></a>
+        ">
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+    </a>
+</div>

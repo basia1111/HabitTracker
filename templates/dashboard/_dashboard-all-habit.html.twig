@@ -1,0 +1,28 @@
+<div class="habit all" id="habit_{{habit.id}}">
+    <div class="habit__color color_{{habit.color}}"> </div>
+    <div class="habit__data" > 
+        <div  class="habit__data">
+            <p class="habit__data--title" >{{habit.name}}</p>
+            <p class="habit__data--category">category</p>
+            <div class="habit__data--wrapper"> 
+                {% if habit.time %}<span class="habit__data--time"><i class="fa-regular fa-clock"></i> {{habit.time|date('H:i')}} </span> {%endif%}
+                <span class="habit__data--reocurance"><i class="fa-regular fa-calendar"></i> 
+                    {% if habit.frequency is same as('days') %}
+                        <span>
+                            {%for day in habit.weekDays%}
+                            <span class="habit__data--time"> {{day}} </span> 
+                            {%endfor%}
+                        </span>
+                    {%else%}
+                        {{habit.frequency}} 
+                    {%endif%}
+                </span>
+                <span class="habit__data--streak"><i class="fa-regular fa-star"></i>  {{habit.streak}} </span>
+            </div>
+        </div>
+    </div>
+    <div class="habit__actions">
+            <a class='habit__action' href='{{path('app_main')}}'><i class='fa-regular fa-pen-to-square'></i></a>
+            <a class='habit__action'href='{{path('app_main')}}' ><i class='fa-regular fa-trash-can'></i></a>
+    </div>
+</div>

@@ -2,6 +2,7 @@ twig:
   file_name_pattern: "*.twig"
   form_themes:
     - form/security_form_theme.html.twig
+    - form/habit_form_theme.html.twig
 
 when@test:
   twig:

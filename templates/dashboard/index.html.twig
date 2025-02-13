@@ -5,9 +5,11 @@
 {% block body %}
 
 <div class="dashboard">
-    {% include "dashboard/modals/_create-habit-modal.html.twig" %}
+    {% include "dashboard/modals/_create-habit-modal.html.twig" with {'createHabitForm': createHabitForm}%}
     {% include "dashboard/_dashboard-header.html.twig" %}
-     {% include "dashboard/_dashboard_stats.html.twig" %}
+    {% include "dashboard/_dashboard_stats.html.twig" %}
+    {% include "dashboard/_dashboard-today-habits.html.twig" %}
+    {% include "dashboard/_dashboard-all-habits.html.twig" with {'habits': habits} %}
 </div>
 {% endblock %}
 

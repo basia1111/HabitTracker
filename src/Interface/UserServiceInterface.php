@@ -2,11 +2,13 @@
 
 namespace App\Interface;
 
+use App\Entity\User;
+
 interface UserServiceInterface
 {
-    public function save($user): void;
+    public function save(User $user): void;
 
-    public function delete($user): void;
+    public function delete(User $user): void;
 
     public function findAll(): array;
 }

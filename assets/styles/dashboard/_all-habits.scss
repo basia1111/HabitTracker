@@ -1,0 +1,8 @@
+.dashboard-all {
+  @include flex(column, center, stretch, 20px);
+  padding-top: 30px;
+  h1 {
+    @include responsive-font-size($font-size-24, $font-size-20);
+    font-weight: 700;
+  }
+}
