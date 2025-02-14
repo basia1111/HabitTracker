@@ -58,23 +58,8 @@ class Habit
     public function getTime(): ?\DateTimeInterface { 
         return $this->time; 
     }
-    public function setTime(\DateTimeInterface $time): self { 
+    public function setTime(?\DateTimeInterface $time): self { 
         $this->time = $time; return $this; 
-    }
-
-    public function getDuration(): int { 
-        return $this->duration; 
-    }
-    public function setDuration(int $duration): self { 
-        $this->duration = $duration; return $this; 
-    }
-
-    public function getDescription(): ?string { 
-        return $this->description;
-    }
-    public function setDescription(?string $description): self {
-        $this->description = $description; return $this; 
-    
     }
 
     public function getUser(): ?User { 

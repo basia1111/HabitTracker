@@ -1,13 +1,15 @@
 import { createHabitElement } from "./createHabitElement";
-import { showErrorMessages } from "./showErrorMessages";
+import { showErrorMessagesCreate } from "./showErrorMessages";
+import { toggleWeekDays, toggleTime } from "./toggleHabitFormFields";
 
 const createForm = document.getElementById("habit-create-form");
 const habitList = document.getElementById("dashboard-all-list");
+toggleWeekDays();
+toggleTime();
 
 createForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   const formData = new FormData(event.target);
-
   try {
     const response = await fetch("/habit/create", {
       method: "POST",
@@ -23,9 +25,9 @@ createForm.addEventListener("submit", async (event) => {
       const newHabit = createHabitElement(data.habit);
       habitList.prepend(newHabit);
     } else {
-      showErrorMessages(data);
+      showErrorMessagesCreate(data);
     }
   } catch (error) {
-    showErrorMessages({ errors: [error.message] });
+    showErrorMessagesCreate({ errors: [error.message] });
   }
 });

@@ -22,7 +22,13 @@
         </div>
     </div>
     <div class="habit__actions">
-            <a class='habit__action' href='{{path('app_main')}}'><i class='fa-regular fa-pen-to-square'></i></a>
-            <a class='habit__action'href='{{path('app_main')}}' ><i class='fa-regular fa-trash-can'></i></a>
+        <button class="habit__action edit-habit-btn" 
+                data-id="{{habit.id}}" 
+                data-url="{{ path('habit_edit_form', {'id': habit.id}) }}">
+            <i class="fa-regular fa-pen-to-square"></i>
+        </button>
+        <button class="habit__action" href="{{path('app_main')}}">
+            <i class="fa-regular fa-trash-can"></i>
+        </button>
     </div>
 </div>

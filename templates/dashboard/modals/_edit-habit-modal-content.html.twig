@@ -1,0 +1,27 @@
+<form id="habit-edit-form" method="post" class="habit-form">
+  <div id="habit-edit-errors" class="mt-2"></div>
+  {% form_theme editHabitForm 'form/habit_form_theme.html.twig' %}
+  {{ form_errors(editHabitForm) }}
+  {{ form_start(editHabitForm) }}
+
+  {{ form_row(editHabitForm.name) }}
+
+  {{ form_row(editHabitForm.hasTime, {
+      'label': '<i class="bi bi-clock"></i>  Set specific time',
+      'label_html': true
+  }) }}
+
+  {{ form_row(editHabitForm.time) }}
+  
+  <label for="habit_form_frequency">Frequency</label>
+  {{ form_row(editHabitForm.frequency) }}
+  
+  {{ form_row(editHabitForm.weekDays) }}
+  
+  <label for="habit_form_color">Color</label>
+  {{ form_row(editHabitForm.color) }}
+  
+  <button type="submit" class="securityForm__submit">Update</button>
+
+  {{ form_end(editHabitForm) }}
+</form>

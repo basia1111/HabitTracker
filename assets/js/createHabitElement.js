@@ -2,6 +2,12 @@ export function createHabitElement(habit) {
   const newHabit = document.createElement("div");
   newHabit.classList.add("habit", "all");
   newHabit.id = `habit_${habit.id}`;
+
+  const habitTime = habit.time.date;
+  const timePart = habitTime.split(" ")[1];
+  const [hours, minutes] = timePart.split(":");
+  const formattedTime = `${hours}:${minutes}`;
+
   newHabit.innerHTML = `
       <div class="habit__color color_${habit.color}"></div>
       <div class="habit__data">
@@ -10,7 +16,7 @@ export function createHabitElement(habit) {
         <div class="habit__data--wrapper">
           ${
             habit.time
-              ? `<span class="habit__data--time"><i class="fa-regular fa-clock"></i> ${habit.time}</span>`
+              ? `<span class="habit__data--time"><i class="fa-regular fa-clock"></i> ${formattedTime}</span>`
               : ""
           }
           <span class="habit__data--reocurance">
@@ -31,16 +37,15 @@ export function createHabitElement(habit) {
         </div>
       </div>
       <div class="habit__actions">
-        <a class='habit__action' href='#'><i class='fa-regular fa-pen-to-square'></i></a>
-        <a class='habit__action' href='#'><i class='fa-regular fa-trash-can'></i></a>
+               <button class="habit__action edit-habit-btn" 
+                data-id="${habit.id}" 
+                data-url="/habit/edit/${habit.id}">
+            <i class="fa-regular fa-pen-to-square"></i>
+            </button>
+            <button class="habit__action" href="{{path('app_main')}}">
+                <i class="fa-regular fa-trash-can"></i>
+            </button>
       </div>
     `;
   return newHabit;
-}
-
-function showErrorMessages(data) {
-  const errorMessages = data.errors || [data.message];
-  document.getElementById("createHabitError").innerHTML = errorMessages
-    .map((error) => `<div class="alert alert-danger">${error}</div>`)
-    .join("");
 }

@@ -1,4 +1,4 @@
-#habit-create-form {
+.habit-form {
   legend {
     display: none !important;
   }
@@ -6,7 +6,11 @@
     color: $text-helper !important;
   }
 }
-
+.form-check {
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
 .habitForm__input,
 .habitForm__input select {
   &:focus {
@@ -21,7 +25,10 @@
 
 #habit_form_frequency,
 #habit_form_weekDays,
-#habit_form_color {
+#habit_form_color,
+#edit_habit_form_frequency,
+#edit_habit_form_weekDays,
+#edit_habit_form_color {
   @include flex(row, start, center, 10px);
   padding: 10px 0;
 
@@ -46,20 +53,23 @@
   }
 }
 
-#habit_form_frequency {
+#habit_form_frequency,
+#edit_habit_form_frequency {
   input:checked + label {
     background-color: #111827;
     color: white !important;
   }
 }
 
-#habit_form_weekDays {
+#habit_form_weekDays,
+#edit_habit_form_weekDays {
   input:checked + label {
     background-color: $text-secondary-light;
     color: white !important;
   }
 }
-#habit_form_color {
+#habit_form_color,
+#edit_habit_form_color {
   input:checked + label {
     --ring-color: #111827;
     --ring-width: 2px;
@@ -73,41 +83,82 @@
     width: 35px;
     height: 35px;
   }
-  label[for="habit_form_color_0"] {
+  label[for="habit_form_color_0"],
+  label[for="edit_habit_form_color_0"] {
     background-color: #ffffff;
     border: 2px solid $border-card;
   }
-  label[for="habit_form_color_1"] {
+  label[for="habit_form_color_1"],
+  label[for="edit_habit_form_color_1"] {
     background-color: #a4bdfc;
   }
-  label[for="habit_form_color_2"] {
+  label[for="habit_form_color_2"],
+  label[for="edit_habit_form_color_2"] {
     background-color: #7ae7bf;
   }
-  label[for="habit_form_color_3"] {
+  label[for="habit_form_color_3"],
+  label[for="edit_habit_form_color_3"] {
     background-color: #dbadff;
   }
-  label[for="habit_form_color_4"] {
+  label[for="habit_form_color_4"],
+  label[for="edit_habit_form_color_4"] {
     background-color: #ff887c;
   }
-  label[for="habit_form_color_5"] {
+  label[for="habit_form_color_5"],
+  label[for="edit_habit_form_color_5"] {
     background-color: #fbd75b;
   }
-  label[for="habit_form_color_6"] {
+  label[for="habit_form_color_6"],
+  label[for="edit_habit_form_color_6"] {
     background-color: #ffb878;
   }
-  label[for="habit_form_color_7"] {
+  label[for="habit_form_color_7"],
+  label[for="edit_habit_form_color_7"] {
     background-color: #46d6db;
   }
-  label[for="habit_form_color_8"] {
+  label[for="habit_form_color_8"],
+  label[for="edit_habit_form_color_8"] {
     background-color: #e1e1e1;
   }
-  label[for="habit_form_color_9"] {
+  label[for="habit_form_color_9"],
+  label[for="edit_habit_form_color_9"] {
     background-color: #5484ed;
   }
-  label[for="habit_form_color_10"] {
+  label[for="habit_form_color_10"],
+  label[for="edit_habit_form_color_10"] {
     background-color: #51b749;
   }
-  label[for="habit_form_color_11"] {
+  label[for="habit_form_color_11"],
+  label[for="edit_habit_form_color_11"] {
     background-color: #dc2127;
   }
+}
+
+#edit_habit_form_hasTime,
+#habit_form_hasTime {
+  display: none;
+}
+
+label[for="edit_habit_form_hasTime"],
+label[for="habit_form_hasTime"] {
+  padding: 10px 25px;
+  background-color: $bg-gray;
+  border: 1px solid $border-input;
+  color: $text-secondary-dark;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  transition: all 0.2s ease-in-out;
+
+  i {
+    padding-right: 4px;
+  }
+}
+
+input#edit_habit_form_hasTime:checked ~ label[for="edit_habit_form_hasTime"],
+input#habit_form_hasTime:checked ~ label[for="habit_form_hasTime"] {
+  --ring-color: #111827;
+  --ring-width: 2px;
+  --ring-offset: 2px;
+  box-shadow: 0 0 0 var(--ring-offset) white,
+    0 0 0 calc(var(--ring-offset) + var(--ring-width)) var(--ring-color);
 }

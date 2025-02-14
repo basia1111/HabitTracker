@@ -7,14 +7,18 @@
       </div>
       <div class="modal-body">
         <div id="createHabitError" class="mt-2"></div>
-        <form id="habit-create-form" method="post">
+        <form id="habit-create-form" method="post" class="habit-form">
           {% form_theme createHabitForm 'form/habit_form_theme.html.twig' %}
           {{ form_errors(createHabitForm) }}
-          {{ form_start(createHabitForm) }}
+          {{ form_start(createHabitForm, {'id_prefix': 'create_'}) }}
 
           {{ form_row(createHabitForm.name) }}
-          
-          <label for="habit_form_time">Time</label>
+        
+          {{ form_row(createHabitForm.hasTime, {
+            'label': '<i class="bi bi-clock"></i>  Set specific time',
+            'label_html': true
+          }) }}
+
           {{ form_row(createHabitForm.time) }}
           
           <label for="habit_form_frequency">Frequency</label>

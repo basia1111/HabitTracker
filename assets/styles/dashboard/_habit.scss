@@ -4,6 +4,7 @@
   @include flex(row, start, center, 20px);
   position: relative;
   padding: 15px 30px 15px 15px;
+  margin-top: 15px;
 }
 
 .habit__color {
@@ -83,6 +84,8 @@
   height: 30px;
   color: $text-helper;
   border-radius: 4px;
+  border: none;
+  background: transparent;
   padding: 5px;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
