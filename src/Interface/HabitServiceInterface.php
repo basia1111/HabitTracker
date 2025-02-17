@@ -11,4 +11,6 @@ interface HabitServiceInterface
     public function delete(Habit $habit): void;
     
     public function findAll(): array;
+
+    public function getTodayHabits();
 }

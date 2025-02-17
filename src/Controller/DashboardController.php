@@ -24,9 +24,11 @@ class DashboardController extends AbstractController
         $form = $this->createForm(HabitFormType::class, $habit);
 
         $habits = $this->habitService->findAll();
-        
+        $todayHabits = $this->habitService->getTodayHabits(); 
+
         return $this->render('dashboard/index.html.twig', [
             'habits' => $habits,
+            'todayHabits' => $todayHabits,
             'createHabitForm' => $form ->createView(),
         ]);
     }

@@ -10,7 +10,7 @@
     {% include "dashboard/modals/_delete-habit-modal.html.twig" %}
     {% include "dashboard/_dashboard-header.html.twig" %}
     {% include "dashboard/_dashboard_stats.html.twig" %}
-    {% include "dashboard/_dashboard-today-habits.html.twig" %}
+    {% include "dashboard/_dashboard-today-habits.html.twig" with {'todayHabits' : todayHabits} %}
     {% include "dashboard/_dashboard-all-habits.html.twig" with {'habits': habits} %}
 </div>
 {% endblock %}

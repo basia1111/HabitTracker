@@ -29,4 +29,9 @@ class HabitService implements HabitServiceInterface
     {
         return $this->habitRepository->queryAll();
     }
+
+    public function getTodayHabits():array
+    {
+        return $this->habitRepository->getTodayHabits();
+    }
 }

@@ -1,18 +1,37 @@
-
-
 <div class="dashboard-today">
     <h1> Today </h1>
-    <div class="dashboard-today__morning dashboard-today__category">
-        <h2><i class="bi bi-sun"></i>  Morning </h2>
+    
+    {% set categories = {
+        'morning': {
+            'icon': 'bi-sun',
+            'title': 'Morning'
+        },
+        'afternoon': {
+            'icon': 'bi-brightness-alt-high',
+            'title': 'Afternoon'
+        },
+        'evening': {
+            'icon': 'bi-moon',
+            'title': 'Evening'
+        },
+        'night': {
+            'icon': 'bi-moon-stars',
+            'title': 'Night'
+        },
+        'unscheduled': {
+            'icon': 'bi-clock',
+            'title': 'Unscheduled'
+        }
+    } %}
 
-    </div>
-    <div class="dashboard-today__afternoon dashboard-today__category">
-        <h2><i class="bi bi-brightness-alt-high"></i>  Afternoon </h2>
-    </div>
-    <div class="dashboard-today__evening dashboard-today__category">
-     <h2><i class="bi bi-moon"></i>  Evening </h2>
-    </div>
-     <div class="dashboard-today__unsheduled dashboard-today__category">
-      <h2><i class="bi bi-clock"></i>  Unsheduled </h2>
-    </div>
+    {% for category, config in categories %}
+        {% if todayHabits[category]|length > 0 %}
+            <div class="dashboard-today__{{ category }} dashboard-today__category">
+                <h2><i class="bi {{ config.icon }}"></i> {{ config.title }}</h2>
+                {% for habit in todayHabits[category] %}
+                    {% include "dashboard/_dashboard-today-habit.html.twig" with {'habit': habit} %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endfor %}
 </div>

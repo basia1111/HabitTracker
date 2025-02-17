@@ -30,7 +30,7 @@ class Habit
     #[ORM\Column(type: 'string', length: 50)]
     private ?string $frequency = null;
 
-    #[ORM\Column(type: 'array', nullable: true)]
+    #[ORM\Column(type: 'json', nullable: true)]
     private ?array $weekDays = null;
 
     #[ORM\Column(type: 'string', nullable: true)]
