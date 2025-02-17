@@ -68,7 +68,7 @@ function initializeEditForm(id) {
         }
       })
       .catch((error) => {
-        showErrorMessagesCreate({ errors: [error.message] });
+        showErrorMessagesEdit({ errors: [error.message] });
       });
   });
 }

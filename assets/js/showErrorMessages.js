@@ -10,3 +10,10 @@ export function showErrorMessagesEdit(data) {
     .map((error) => `<div class="alert alert-danger">${error}</div>`)
     .join("");
 }
+
+export function showErrorMessagesDelete(data) {
+  const errorMessages = data.errors || [data.message];
+  document.getElementById("habit-delete-errors").innerHTML = errorMessages
+    .map((error) => `<div class="alert alert-danger">${error}</div>`)
+    .join("");
+}

@@ -97,6 +97,10 @@ class HabitController extends AbstractController
     #[Route('/habit/edit/{id}', name: 'habit_edit_form', methods: ['GET'])]
     public function getHabitEditForm(Habit $habit): Response
     {
+        if($response = $this->checkHabitOwnership($habit)){
+            return $response;
+        }
+
         $form = $this->createForm(EditHabitFormType::class, $habit);
 
         return $this->render('dashboard/modals/_edit-habit-modal-content.html.twig', [
@@ -116,6 +120,11 @@ class HabitController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
+
+                if($response = $this->checkHabitOwnership($habit)){
+                    return $response;
+                }
+            
                 if(!$habit->getFrequency()){
                     return new JsonResponse([
                         'status' => 'error',
@@ -169,4 +178,51 @@ class HabitController extends AbstractController
             ], 500);
         }
     }
+
+    /**
+     * Delete habit
+     */
+
+    #[Route('habit/delete/{id}', name: "habit_delete", methods: ['DELETE'])]
+    public function habitDelete(Request $request, Habit $habit){
+        if($response = $this->checkHabitOwnership($habit)){
+            return $response;
+        }
+        try{
+            $this->habitServiceInterface->delete($habit);
+
+            return new JsonResponse([
+                'status' => 'success',
+                'message' => 'Habit deleted succesfully',
+            ], 200);
+
+        } catch (\Exception $e){
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => 'An error occurred while deleting the habit.',
+            ], 500);
+        }
     }
+
+
+    private function checkHabitOwnership(Habit $habit):?JsonResponse
+    {
+        $user = $this->security->getUser();
+        if (!$user) {
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => 'User not authenticated.',
+            ], 403);
+        } 
+         
+        if($user->getId() !== $habit->getUser()->getId()) {
+            return new JsonResponse([
+                'status' => 'error',
+                'message' =>  'You do not have permission to change this habit.',
+            ], 403);
+        }
+
+        return null;
+
+    }
+}

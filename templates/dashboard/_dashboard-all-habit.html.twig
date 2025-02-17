@@ -23,11 +23,13 @@
     </div>
     <div class="habit__actions">
         <button class="habit__action edit-habit-btn" 
-                data-id="{{habit.id}}" 
-                data-url="{{ path('habit_edit_form', {'id': habit.id}) }}">
+            data-id="{{habit.id}}" 
+            data-url="/habit/edit/{{habit.id}}">
             <i class="fa-regular fa-pen-to-square"></i>
         </button>
-        <button class="habit__action" href="{{path('app_main')}}">
+        <button class="habit__action delete-habit-btn" href="{{path('app_main')}}"
+            data-id="{{habit.id}}" 
+            data-url="/habit/delete/{{habit.id}}">
             <i class="fa-regular fa-trash-can"></i>
         </button>
     </div>
