@@ -2,11 +2,14 @@ export function createHabitElement(habit) {
   const newHabit = document.createElement("div");
   newHabit.classList.add("habit", "all");
   newHabit.id = `habit_${habit.id}`;
+  let formattedTime = null;
 
-  const habitTime = habit.time.date;
-  const timePart = habitTime.split(" ")[1];
-  const [hours, minutes] = timePart.split(":");
-  const formattedTime = `${hours}:${minutes}`;
+  if (habit.time && habit.time.date) {
+    const habitTime = habit.time.date;
+    const timePart = habitTime.split(" ")[1];
+    const [hours, minutes] = timePart.split(":");
+    formattedTime = `${hours}:${minutes}`;
+  }
 
   newHabit.innerHTML = `
       <div class="habit__color color_${habit.color}"></div>
@@ -15,7 +18,7 @@ export function createHabitElement(habit) {
         <p class="habit__data--category">Category</p>
         <div class="habit__data--wrapper">
           ${
-            habit.time
+            formattedTime
               ? `<span class="habit__data--time"><i class="fa-regular fa-clock"></i> ${formattedTime}</span>`
               : ""
           }

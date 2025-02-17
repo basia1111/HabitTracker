@@ -12,35 +12,49 @@ document
     console.log("click");
 
     if (button) {
-      deleteModal.show();
       const id = button.dataset.id;
+
       const deleteButton = document.getElementById("delete-habit");
 
-      const newDeleteButton = deleteButton.cloneNode(true);
-      deleteButton.parentNode.replaceChild(newDeleteButton, deleteButton);
+      if (deleteButton.currentDeleteHandler) {
+        deleteButton.removeEventListener(
+          "click",
+          deleteButton.currentDeleteHandler
+        );
+      }
 
-      newDeleteButton.addEventListener("click", () => {
-        fetch(`/habit/delete/${id}`, {
-          method: "DELETE",
-          headers: { "X-Requested-With": "XMLHttpRequest" },
-        })
-          .then((response) => response.text())
-          .then((data) => {
-            console.log(JSON.parse(data));
-            return JSON.parse(data);
-          })
-          .then((data) => {
-            console.log(data.status);
-            if (data.status === "success") {
-              deleteModal.hide();
-              document.getElementById(`habit_${id}`).remove();
-            } else {
-              showErrorMessagesDelete(data);
-            }
-          })
-          .catch((error) => {
-            showErrorMessagesDelete({ errors: [error.message] });
-          });
-      });
+      deleteButton.currentDeleteHandler = function () {
+        handleDelete(id);
+      };
+
+      deleteButton.addEventListener("click", deleteButton.currentDeleteHandler);
+      deleteModal.show();
     }
   });
+
+function handleDelete(id) {
+  fetch(`/habit/delete/${id}`, {
+    method: "DELETE",
+    headers: { "X-Requested-With": "XMLHttpRequest" },
+  })
+    .then((response) => response.text())
+    .then((data) => {
+      try {
+        const jsonData = JSON.parse(data);
+        if (jsonData.status === "success") {
+          deleteModal.hide();
+          const habitElement = document.getElementById(`habit_${id}`);
+          if (habitElement) {
+            habitElement.remove();
+          }
+        } else {
+          showErrorMessagesDelete(jsonData);
+        }
+      } catch (error) {
+        showErrorMessagesDelete({ errors: [error.message] });
+      }
+    })
+    .catch((error) => {
+      showErrorMessagesDelete({ errors: [error.message] });
+    });
+}

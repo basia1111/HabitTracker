@@ -1,0 +1,17 @@
+.dashboard-today {
+  @include flex(column, center, stretch, 20px);
+  h1 {
+    @include responsive-font-size($font-size-24, $font-size-20);
+    font-weight: 700;
+  }
+  h2 {
+    @include responsive-font-size($font-size-20, $font-size-16);
+    padding-bottom: 20px;
+    i {
+      padding-right: 10px;
+    }
+  }
+}
+.dashboard-today__category {
+  padding-bottom: 20px;
+}
