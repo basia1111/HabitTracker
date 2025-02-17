@@ -156,7 +156,7 @@ class HabitController extends AbstractController
                         'weekDays' => $habit->getWeekDays(),
                         'color' => $habit->getColor(),
                         'streak' => $habit->getStreak(),
-                        'time' => $habit->getTime() ? $habit->getTime()->format('H:i') : null,
+                        'time' => $habit->getTime(),
                     ],
                     'message' => 'Habit successfully updated!',
                 ]);

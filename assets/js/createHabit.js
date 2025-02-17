@@ -1,29 +1,33 @@
-import { createHabitElement } from "./createHabitElement";
-import { showErrorMessagesCreate } from "./showErrorMessages";
-import { toggleWeekDays, toggleTime } from "./toggleHabitFormFields";
+import { createHabitElement } from "./createElements/createHabitElement";
+import { showErrorMessagesCreate } from "./habitFormHelperFunctions/showErrorMessages";
+import { toggleWeekDays, toggleTime } from "./habitFormHelperFunctions/toggleHabitFormFields";
+import { fetchTodayHabits, checkIfToday } from "./habitHelperFunctions";
 
 const createForm = document.getElementById("habit-create-form");
 const habitList = document.getElementById("dashboard-all-list");
+
+// Initialize form field toggles
 toggleWeekDays();
 toggleTime();
 
+// Handle form submission
 createForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   const formData = new FormData(event.target);
-  try {
-    const response = await fetch("/habit/create", {
-      method: "POST",
-      body: formData,
-    });
 
+  try {
+    const response = await fetch("/habit/create", { method: "POST", body: formData });
     const data = await response.json();
 
     if (data.status === "success" && data.habit) {
-      const closeButton = document.getElementById("closeCreateHabitModal");
-      closeButton.click();
+      document.getElementById("closeCreateHabitModal").click();
 
+      // Create the new habit element and add it to the list
       const newHabit = createHabitElement(data.habit);
       habitList.prepend(newHabit);
+
+      // If the habit is for today, refresh today's habits list
+      if (checkIfToday(data.habit)) fetchTodayHabits();
     } else {
       showErrorMessagesCreate(data);
     }

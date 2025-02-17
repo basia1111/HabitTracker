@@ -1,3 +1,5 @@
+import { formatTime } from "../habitHelperFunctions";
+
 export function createHabitElement(habit) {
   const newHabit = document.createElement("div");
   newHabit.classList.add("habit", "all");
@@ -5,10 +7,7 @@ export function createHabitElement(habit) {
   let formattedTime = null;
 
   if (habit.time && habit.time.date) {
-    const habitTime = habit.time.date;
-    const timePart = habitTime.split(" ")[1];
-    const [hours, minutes] = timePart.split(":");
-    formattedTime = `${hours}:${minutes}`;
+    formattedTime = formatTime(habit.time.date);
   }
 
   newHabit.innerHTML = `

@@ -25,13 +25,13 @@ class HabitService implements HabitServiceInterface
         $this->habitRepository->delete($habit);
     }
 
-    public function findAll(): array
+    public function findAll($user): array
     {
-        return $this->habitRepository->queryAll();
+        return $this->habitRepository->queryAll($user);
     }
 
-    public function getTodayHabits():array
+    public function getTodayHabits($user):array
     {
-        return $this->habitRepository->getTodayHabits();
+        return $this->habitRepository->getTodayHabits($user);
     }
 }
