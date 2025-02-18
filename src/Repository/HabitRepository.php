@@ -40,29 +40,33 @@ class HabitRepository extends ServiceEntityRepository
     }
 
     public function queryAll($user): array
-{
-    return $this->createQueryBuilder('habits')
-        ->where('habits.user = :user')
-        ->setParameter('user', $user)
-        ->orderBy('habits.id', 'DESC')
-        ->getQuery()
-        ->getResult();
-}
+    {
+        return $this->createQueryBuilder('habits')
+            ->where('habits.user = :user')
+            ->setParameter('user', $user)
+            ->orderBy('habits.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getAllHabits(): array
+    {
+        return $this->createQueryBuilder('habits')
+            ->orderBy('habits.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 
     
-
     public function getTodayHabits($user): array
     {
         $today = (new \DateTime())->format('N');
-        $weekDays = [
-            1 => "mon", 2 => "tue", 3 => "wed",
-            4 => "thu", 5 => "fri", 6 => "sat", 7 => "sun"
-        ];
-        $currentWeekDay = $weekDays[$today];
-    
+        $todayDate = (new \DateTime())->format('Y-m-d'); 
+        $currentWeekDay = strtolower((new \DateTime('yesterday'))->format('D'));
+
         $entityManager = $this->getEntityManager();
         $conn = $entityManager->getConnection();
-    
+
         $sql = '
             SELECT h.*, 
             CASE
@@ -71,7 +75,11 @@ class HabitRepository extends ServiceEntityRepository
                 WHEN TIME(h.time) >= \'12:00:00\' AND TIME(h.time) < \'18:00:00\' THEN \'afternoon\'
                 WHEN TIME(h.time) >= \'18:00:00\' AND TIME(h.time) <= \'23:59:59\' THEN \'evening\'
                 ELSE \'night\'
-            END AS time_category
+            END AS time_category,
+            CASE 
+                WHEN JSON_SEARCH(h.completions, \'one\', :today_date) IS NOT NULL THEN true 
+                ELSE false 
+            END AS is_completed
             FROM habit h 
             WHERE h.user_id = :user_id
             AND (h.frequency = :daily
@@ -80,7 +88,7 @@ class HabitRepository extends ServiceEntityRepository
             OR (h.frequency = :days AND JSON_CONTAINS(h.week_days, CONCAT(\'"\',:current_weekday,\'"\'), \'$\')))
             ORDER BY h.time ASC
         ';
-    
+
         $stmt = $conn->prepare($sql);
         $result = $stmt->executeQuery([
             'user_id' => $user->getId(),
@@ -89,11 +97,12 @@ class HabitRepository extends ServiceEntityRepository
             'weekends' => 'weekends',
             'days' => 'days',
             'today' => $today,
-            'current_weekday' => $currentWeekDay
+            'current_weekday' => $currentWeekDay,
+            'today_date' => $todayDate,
         ]);
-    
+
         $habits = $result->fetchAllAssociative();
-    
+
         $categorizedHabits = [
             'morning' => [],
             'afternoon' => [],
@@ -101,13 +110,12 @@ class HabitRepository extends ServiceEntityRepository
             'night' => [],
             'unscheduled' => []
         ];
-    
+
         foreach ($habits as $habit) {
             $categorizedHabits[$habit['time_category']][] = $habit;
         }
-    
+
         return $categorizedHabits;
     }
     
-   
 }

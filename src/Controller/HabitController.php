@@ -11,6 +11,7 @@ use App\Form\EditHabitFormType;
 use App\Form\HabitFormType;
 use App\Interface\HabitServiceInterface;
 use Symfony\Bundle\SecurityBundle\Security;
+use DateTime;
 
 class HabitController extends AbstractController 
 {
@@ -224,5 +225,37 @@ class HabitController extends AbstractController
 
         return null;
 
+    }
+
+    #[Route('/habit/complete/{id}', methods: ['POST'])]
+    public function toggleCompletion(Habit $habit): JsonResponse
+    {
+        
+        try {
+            $today = new \DateTime();
+            
+            if ($habit->hasCompletion($today)) {
+                $habit->removeCompletion($today);
+                $habit->setStreak(max(0, $habit->getStreak() - 1));
+                $completed = false;
+            } else {
+                $habit->addCompletion($today);
+                $habit->setStreak($habit->getStreak() + 1);
+                $completed = true;
+            }
+
+            $this->habitServiceInterface->save($habit);
+
+            return new JsonResponse([
+                'status' => 'success',
+                'streak' => $habit->getStreak(),
+                'completed' => $completed
+            ]);
+        } catch (\Exception $e) {
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ], 500);
+        }
     }
 }

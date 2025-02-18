@@ -42,7 +42,7 @@ class Habit
     #[ORM\Column(type: 'integer')]
     private ?int $streak = 0;
 
-    #[ORM\Column(type: 'array')]
+    #[ORM\Column(type: 'json')]
     private array $completions = [];  
 
     public function getId(): ?int { 
@@ -90,10 +90,10 @@ class Habit
         return $this;
     }
 
-    public function getStreak(): ?string { 
+    public function getStreak(): ?int { 
         return $this->streak; 
     }
-    public function setStreak(string $color): self { 
+    public function setStreak(string $streak): self { 
         $this->streak = $streak; 
         return $this;
     }
@@ -114,9 +114,20 @@ class Habit
         $this->googleRecurrenceRule = $googleRecurrenceRule; return $this; 
     }
 
+    public function getCompletions(): array
+    {
+        return $this->completions ?? [];
+    }
+
+    public function hasCompletion(\DateTimeInterface $date): bool
+    {
+        $dateString = $date->format('Y-m-d');
+        return in_array($dateString, $this->completions);
+    }
+
     public function addCompletion(\DateTimeInterface $completionDate): self
     {
-        $dateString = $completionDate->format('Y-m-d H:i:s');
+        $dateString = $completionDate->format('Y-m-d');
         if (!in_array($dateString, $this->completions)) {
             $this->completions[] = $dateString;
         }
@@ -125,21 +136,10 @@ class Habit
 
     public function removeCompletion(\DateTimeInterface $completionDate): self
     {
-        $dateString = $completionDate->format('Y-m-d H:i:s');
-        $this->completions = array_filter($this->completions, function ($completion) use ($dateString) {
+        $dateString = $completionDate->format('Y-m-d');
+        $this->completions = array_filter($this->completions, function($completion) use ($dateString) {
             return $completion !== $dateString;
         });
         return $this;
-    }
-
-    public function getCompletions(): array
-    {
-        return $this->completions;
-    }
-
-    public function hasCompletion(\DateTimeInterface $completionDate): bool
-    {
-        $dateString = $completionDate->format('Y-m-d H:i:s');
-      
     }
 }

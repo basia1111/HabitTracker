@@ -30,6 +30,11 @@ class HabitService implements HabitServiceInterface
         return $this->habitRepository->queryAll($user);
     }
 
+    public function getAllHabits():array
+    {
+        return $this->habitRepository->getAllHabits();
+    }
+
     public function getTodayHabits($user):array
     {
         return $this->habitRepository->getTodayHabits($user);

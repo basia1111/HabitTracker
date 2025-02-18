@@ -12,5 +12,7 @@ interface HabitServiceInterface
     
     public function findAll($user): array;
 
-    public function getTodayHabits($user);
+    public function getTodayHabits($user): array;
+
+    public function getAllHabits(): array;
 }

@@ -53,8 +53,9 @@
 .habit__checkbox {
   width: 23px;
   height: 23px;
-  border: 1px solid $text-helper;
+  border: 1px solid $accent-dark;
   border-radius: 2px;
+  transition: all 0.2s ease-in-out;
 }
 
 .habit__data--title {
@@ -125,4 +126,15 @@
 .all .habit__actions {
   position: relative;
   display: flex;
+}
+
+.habit--completed {
+  opacity: 0.7;
+  .habit__data--title {
+    text-decoration: line-through;
+  }
+  .habit__checkbox {
+    background-image: url("../../../public/images/checkmark.png");
+    background-size: 20px;
+  }
 }
