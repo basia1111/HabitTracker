@@ -14,7 +14,6 @@ export function createHabitElement(habit) {
       <div class="habit__color color_${habit.color}"></div>
       <div class="habit__data">
         <p class="habit__data--title">${habit.name}</p>
-        <p class="habit__data--category">Category</p>
         <div class="habit__data--wrapper">
           ${formattedTime ? `<span class="habit__data--time"><i class="fa-regular fa-clock"></i> ${formattedTime}</span>` : ""}
           <span class="habit__data--reocurance">

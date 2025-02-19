@@ -102,7 +102,7 @@ class DashboardController extends AbstractController
         $weatherResponse = $this->httpClient->request('GET', "https://api.openweathermap.org/data/2.5/weather?q=".$city."&appid=".$this->weatherApiKey);
         $weatherData = $weatherResponse->toArray();
         $weather_description = $weatherData['weather'][0]['description'];
-        $weather_temperature =  round($weatherData['main']['temp'] -  273.15, 2);
+        $weather_temperature =  round($weatherData['main']['temp'] -  273.15);
         $weather_icon =  $weatherData['weather'][0]['icon'];
 
         return new JsonResponse([
@@ -116,7 +116,7 @@ class DashboardController extends AbstractController
         } catch (\Exception $e) {
             return new JsonResponse([
                 'status' => 'error',
-                'message' => 'Data not avaliable'
+                'message' => $e->getMessage(),
             ], 500);
         }
     }   

@@ -1,12 +1,10 @@
 <div class="dashboard-header">
     <div class="dashboard-header__right-section">
         <h1> My Habits </h1>
-        <div>
-            <span> {{"now"| date("l, F j")}} </span>
-            <span id="dashboard-header__city"> </span>
-            <span id="dashboard-header__temp"> </span>
-            <span id="dashboard-header__icon"> </span>
-            <span id="dashboard-header__desc"> </span>
+        <div id="dashboard-header__data">
+            <span id="dashboard-header__date" > {{"now"| date("l, F j")}} </span>
+            <span id="dashboard-header__city">Loading...</span>
+            <span id="dashboard-header__weather"></span>
         </div>
     </div>
     <button type="button" data-bs-toggle="modal" data-bs-target="#createHabitModal">

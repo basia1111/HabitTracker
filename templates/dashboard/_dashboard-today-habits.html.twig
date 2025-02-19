@@ -2,23 +2,23 @@
     
     {% set categories = {
         'morning': {
-            'icon': 'bi-sun',
+            'icon': 'bi bi-sun',
             'title': 'Morning'
         },
         'afternoon': {
-            'icon': 'bi-brightness-alt-high',
+            'icon': 'bi bi bi-cloud-sun',
             'title': 'Afternoon'
         },
         'evening': {
-            'icon': 'bi-moon',
+            'icon': 'bi bi-moon',
             'title': 'Evening'
         },
         'night': {
-            'icon': 'bi-moon-stars',
+            'icon': 'bi bi-moon-stars',
             'title': 'Night'
         },
         'unscheduled': {
-            'icon': 'bi-clock',
+            'icon': 'bi bi-clock',
             'title': 'Unscheduled'
         }
     } %}
@@ -26,7 +26,7 @@
     {% for category, config in categories %}
         {% if todayHabits[category]|length > 0 %}
             <div class="dashboard-today__{{ category }} dashboard-today__category">
-                <h2><i class="bi {{ config.icon }}"></i> {{ config.title }}</h2>
+                <h2><i class="{{ config.icon }}"></i> {{ config.title }}</h2>
                 {% for habit in todayHabits[category] %}
                     {% include "dashboard/_dashboard-today-habit.html.twig" with {'habit': habit} %}
                 {% endfor %}

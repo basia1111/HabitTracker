@@ -7,6 +7,8 @@ import "./js/editHabit";
 import "./js/deleteHabit";
 import "./js/completeHabit";
 
+import { WEATHER_ICONS } from "./js/habitCategories";
+
 console.log("Bootstrap JS and CSS are loaded.");
 
 /*async function getUserCity() {
@@ -43,11 +45,8 @@ async function getWeather() {
     if (data.status === "success") {
       console.log(data);
 
-      document.getElementById("dashboard-header__city").innerText = data.city;
-      document.getElementById("dashboard-header__temp").innerText = `${data.temp} °C`;
-      document.getElementById(
-        "dashboard-header__icon"
-      ).innerHTML = `<img src="https://openweathermap.org/img/wn/${data.icon}.png" alt="Weather Icon" width="50" height="50"></img>`;
+      document.getElementById("dashboard-header__city").innerHTML = `<i class="bi bi-geo-alt"></i> ${data.city}`;
+      document.getElementById("dashboard-header__weather").innerHTML = `<i class="bi ${WEATHER_ICONS[data.icon]}"></i> ${data.temp} °C`;
     } else {
       console.log(data.message);
     }

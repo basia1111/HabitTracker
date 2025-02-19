@@ -1,16 +1,62 @@
-.habit {
+/*layout*/
+.habit.all {
   @extend %card-style;
   @include shadow();
-  @include flex(row, start, center, 20px);
+  @include flex(row, space-between, start, 20px);
   position: relative;
-  padding: 15px 30px 15px 15px;
   margin-top: 15px;
+  padding: 15px 15px 15px 45px;
 }
 
+.habit__data--reocurance,
+.habit__data--time,
+.habit__data--streak {
+  @extend %text-muted;
+}
+
+.habit__data--wrapper {
+  @include flex(row, start, center, 20px);
+  padding-top: 10px;
+}
+
+.all .habit__actions {
+  position: relative;
+  display: flex;
+}
+
+.habit.today {
+  @include flex(row, space-between, center, 20px, wrap);
+  position: relative;
+  margin-top: 15px;
+
+  @media (max-width: 768px) {
+    @include flex(row, space-between, center, 10px, wrap);
+  }
+
+  .habit__left-side {
+    @include flex(row, start, center, 20px);
+    @media (max-width: 768px) {
+      @include flex(row, space-between, center, 10px, wrap);
+    }
+  }
+  .habit__right-side {
+    @include flex(row, end, center, 20px);
+    @media (max-width: 768px) {
+      @include flex(row, space-between, center, 8px, wrap);
+    }
+  }
+}
+
+/*color*/
 .habit__color {
   width: 4px;
-  height: 48px;
+  height: 42px;
   border-radius: 10px;
+}
+.all .habit__color {
+  position: absolute;
+  left: 15px;
+  height: 56px;
 }
 
 .color_0 {
@@ -50,27 +96,32 @@
   background-color: #dc2127;
 }
 
+/*checkbox*/
 .habit__checkbox {
-  width: 23px;
-  height: 23px;
-  border: 1px solid $accent-dark;
+  width: 20px;
+  height: 20px;
+  border: 1px solid $text-helper;
   border-radius: 2px;
   transition: all 0.2s ease-in-out;
 }
 
-.habit__data--title {
-  font-weight: 600;
-}
-.habit__data--reocurance,
-.habit__data--time,
-.habit__data--streak {
-  @extend %text-muted;
+/*title*/
+
+.today .habit__data--title {
+  @include responsive-font-size($font-size-16, $font-size-16);
+  font-weight: 400;
 }
 
+.all .habit__data--title {
+  @include responsive-font-size($font-size-18, $font-size-16);
+  font-weight: 600;
+}
+
+/*actions*/
 .habit__actions {
   position: absolute;
   right: 15px;
-  color: $text-helper;
+  color: $text-secondary-dark;
   cursor: pointer;
   &:hover {
     color: $accent-dark;
@@ -83,58 +134,27 @@
   align-items: center;
   width: 30px;
   height: 30px;
-  color: $text-helper;
   border-radius: 4px;
   border: none;
   background: transparent;
+  color: $text-secondary-light;
   padding: 5px;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
   &:hover {
-    background-color: $text-primary-light;
+    background-color: #e7eaf170;
   }
 }
 
-/*today*/
-.today .habit__data--title {
-  @include responsive-font-size($font-size-16, $font-size-14);
-}
-
-/*all*/
-.all.habit {
-  justify-content: space-between;
-  align-items: start;
-  padding: 15px 15px 15px 45px;
-}
-.all .habit__color {
-  position: absolute;
-  left: 15px;
-  height: 72px;
-}
-.habit__data--title {
-  @include responsive-font-size($font-size-18, $font-size-16);
-}
-.habit__data--wrapper {
-  @include flex(row, start, center, 20px);
-  padding-top: 10px;
-}
-.all .habit__data--category {
-  @include flex(row, space-between, center, 20px);
-  color: $text-secondary-dark;
-}
-
-.all .habit__actions {
-  position: relative;
-  display: flex;
-}
+/*completed habit*/
 
 .habit--completed {
-  opacity: 0.7;
   .habit__data--title {
     text-decoration: line-through;
+    opacity: 0.5;
   }
   .habit__checkbox {
     background-image: url("../../../public/images/checkmark.png");
-    background-size: 20px;
+    background-size: 18px;
   }
 }

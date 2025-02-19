@@ -67,3 +67,7 @@
   font-weight: 600;
   padding-bottom: 20px;
 }
+
+.bi::before {
+  -webkit-text-stroke: 0.5px;
+}

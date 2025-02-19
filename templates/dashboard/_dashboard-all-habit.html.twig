@@ -3,7 +3,6 @@
     <div class="habit__data" > 
         <div  class="habit__data">
             <p class="habit__data--title" >{{habit.name}}</p>
-            <p class="habit__data--category">category</p>
             <div class="habit__data--wrapper"> 
                 {% if habit.time %}<span class="habit__data--time"><i class="fa-regular fa-clock"></i> {{habit.time|date('H:i')}} </span> {%endif%}
                 <span class="habit__data--reocurance"><i class="fa-regular fa-calendar"></i> 

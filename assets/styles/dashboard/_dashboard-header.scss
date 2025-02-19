@@ -1,5 +1,6 @@
 .dashboard-header {
   @include flex(row, space-between, center, 10px);
+  padding-bottom: 20px;
 
   .dashboard-header__right-section {
     h1 {
@@ -8,9 +9,15 @@
       padding: 10px 0;
       font-weight: 700;
     }
-    p {
-      @extend %text-muted;
-      @include responsive-font-size($font-size-16, $font-size-14);
+    #dashboard-header__data {
+      @include flex(row, start, center, 20px);
+      span {
+        @extend %text-muted;
+        @include responsive-font-size($font-size-16, $font-size-14);
+      }
+      #dashboard-header__date {
+        font-weight: 500;
+      }
     }
   }
   button {

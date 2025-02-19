@@ -64,7 +64,7 @@ async function initializeEditForm(id) {
       const jsonData = JSON.parse(data);
 
       if (jsonData.status === "success") {
-        /*editModal.hide();*/
+        editModal.hide();
 
         // Replace the updated habit element in the list
         const habitElement = document.getElementById(`habit_${jsonData.habit.id}`);
