@@ -77,5 +77,5 @@ export function updateStats(stats) {
   statLongestStreak.innerText = `${stats.longestStreak}`;
 
   const statCompletionRate = document.getElementById("stat__completion-rate");
-  statCompletionRate.innerText = `${((stats.completedHabits / stats.totalTodayHabits) * 100).toFixed(0)}%`;
+  statCompletionRate.innerText = stats.totalTodayHabits > 0 ? `${((stats.completedHabits / stats.totalTodayHabits) * 100).toFixed(0)}%` : `0%`;
 }

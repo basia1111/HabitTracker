@@ -37,6 +37,63 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $googleId;
 
+    #[ORM\Column(type:"string", nullable:true)]
+    private $googleAccessToken;
+
+   
+    #[ORM\Column(type:"string", nullable:true)]
+    private $googleRefreshToken;
+    
+    #[ORM\Column(type:"string", nullable:true)]
+    private ?string $googleCalendarId = null;
+
+    #[ORM\Column(type:"string", nullable:true)]
+    private ?string $googleEmail = null;
+
+    public function getGoogleEmail(): ?string
+    {
+        return $this->googleEmail;
+    }
+
+    public function setGoogleEmail(?string $googleEmail): self
+    {
+        $this->googleEmail = $googleEmail;
+        return $this;
+    }
+
+    public function getGoogleCalendarId(): ?string
+    {
+        return $this->googleCalendarId;
+    }
+
+    public function setGoogleCalendarId(?string $googleCalendarId): self
+    {
+        $this->googleCalendarId = $googleCalendarId;
+        return $this;
+    }
+
+    public function getGoogleAccessToken(): ?string
+    {
+        return $this->googleAccessToken;
+    }
+
+    public function setGoogleAccessToken(?string $googleAccessToken): self
+    {
+        $this->googleAccessToken = $googleAccessToken;
+        return $this;
+    }
+
+    public function getGoogleRefreshToken(): ?string
+    {
+        return $this->googleRefreshToken;
+    }
+
+    public function setGoogleRefreshToken(?string $googleRefreshToken): self
+    {
+        $this->googleRefreshToken = $googleRefreshToken;
+        return $this;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

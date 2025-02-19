@@ -1,18 +1,3 @@
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import "bootstrap/dist/css/bootstrap.min.css";
-import * as bootstrap from "bootstrap";
-
-import "./js/createHabit";
-import "./js/editHabit";
-import "./js/deleteHabit";
-import "./js/completeHabit";
-
-import "./js/getWeather";
-
-import { WEATHER_ICONS } from "./js/habitCategories";
-
-console.log("Bootstrap JS and CSS are loaded.");
-
 async function getWeather() {
   try {
     const response = await fetch("/api/weather");

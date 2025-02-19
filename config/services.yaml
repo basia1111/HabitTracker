@@ -15,6 +15,9 @@ services:
       $entityManager: "@doctrine.orm.entity_manager"
   App\Scheduler\HabitScheduler:
     tags: ["scheduler.schedule_provider"]
+  App\Service\GoogleCalendarService:
+    arguments:
+      $params: "@parameter_bag"
 
   # makes classes in src/ available to be used as services
   # this creates a service per class whose id is the fully-qualified class name

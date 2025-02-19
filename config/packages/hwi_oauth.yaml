@@ -5,7 +5,7 @@ hwi_oauth:
       type: google
       client_id: "%env(GOOGLE_CLIENT_ID)%"
       client_secret: "%env(GOOGLE_CLIENT_SECRET)%"
-      scope: "email profile openid"
+      scope: "email profile https://www.googleapis.com/auth/calendar"
       options:
         access_type: offline
         approval_prompt: force

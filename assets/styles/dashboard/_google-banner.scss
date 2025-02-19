@@ -1,0 +1,66 @@
+.google-calendar-banner {
+  @include shadow();
+  background-color: $accent-dark;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  margin-top: 10px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &__content {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    gap: 16px;
+    position: relative;
+  }
+
+  &__icon {
+    background: $accent-dark-hover;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  &__text {
+    flex-grow: 1;
+
+    h3 {
+      @include responsive-font-size($font-size-20, $font-size-16);
+      font-weight: 600;
+      color: $text-white;
+      margin: 0 0 5px 0;
+    }
+
+    p {
+      @include responsive-font-size($font-size-14, $font-size-12);
+      color: $text-secondary-light;
+      margin: 0;
+      line-height: 1.5;
+    }
+  }
+  &__button {
+    @extend %button-light-styles;
+  }
+}
+
+@media (max-width: 767px) {
+  .google-calendar-banner {
+    margin: 1rem 0;
+
+    &__content {
+      flex-direction: column;
+      text-align: center;
+      padding: 1.5rem;
+      gap: 1rem;
+    }
+
+    &__text {
+      margin: 0.25rem 0;
+    }
+
+    &__button {
+      width: 100%;
+    }
+  }
+}

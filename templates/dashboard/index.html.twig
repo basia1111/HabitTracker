@@ -14,6 +14,7 @@
             'totalTodayHabits' : totalTodayHabits,
             'longestStreak' : longestStreak,
             'completedHabits' : completedHabits} %}
+    {% include "dashboard/_dashboard-google-connect.twig" %}
     <div id="dashboard-today-wrapper">
     {% include "dashboard/_dashboard-today-habits.html.twig" with {'todayHabits' : todayHabits} %}
     </div>

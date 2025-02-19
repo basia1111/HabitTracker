@@ -33,7 +33,13 @@
         </div>
         <div>
             <p class="dashboard-stats__block--title"> Completion Rate </p>
-            <p class="dashboard-stats__block--value" id="stat__completion-rate"> {{((completedHabits / totalTodayHabits) * 100)|round}} %</p>
+            <p class="dashboard-stats__block--value" id="stat__completion-rate"> 
+            {% if totalTodayHabits > 0 %}
+                {{((completedHabits / totalTodayHabits) * 100)|round}} %
+            {% else %}
+                0%
+            {% endif %}
+            </p>
         </div>
     </div>
 </div>
