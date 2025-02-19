@@ -6,7 +6,7 @@
         </div>
         <div>
             <p class="dashboard-stats__block--title"> Active Habits </p>
-            <p class="dashboard-stats__block--value">12 </p>
+            <p class="dashboard-stats__block--value"  id="stat__total-habits">{{totalHabits}} </p>
         </div>
     </div>
     <div class="dashboard-stats__block"> 
@@ -15,7 +15,7 @@
         </div>
         <div>
             <p class="dashboard-stats__block--title"> Longest Streak </p>
-            <p class="dashboard-stats__block--value"> 28 days</p>
+            <p class="dashboard-stats__block--value" id="stat__longest-streak">{{longestStreak}} {% if longestStreak == 1 %} day {% else %} days {% endif %}</p>
         </div>
     </div>
     <div class="dashboard-stats__block"> 
@@ -24,7 +24,7 @@
         </div>
         <div>
             <p class="dashboard-stats__block--title"> Today's Progress </p>
-            <p class="dashboard-stats__block--value"> 5/8 </p>
+            <p class="dashboard-stats__block--value" id="stat__progress"> {{completedHabits}}/{{totalTodayHabits}}</p>
         </div>
     </div>
     <div class="dashboard-stats__block"> 
@@ -33,7 +33,7 @@
         </div>
         <div>
             <p class="dashboard-stats__block--title"> Completion Rate </p>
-            <p class="dashboard-stats__block--value"> 87% </p>
+            <p class="dashboard-stats__block--value" id="stat__completion-rate"> {{((completedHabits / totalTodayHabits) * 100)|round}} %</p>
         </div>
     </div>
 </div>

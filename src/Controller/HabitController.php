@@ -9,14 +9,16 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Habit;
 use App\Form\EditHabitFormType;
 use App\Form\HabitFormType;
+use App\Interface\HabitStatsServiceInterface;
 use App\Interface\HabitServiceInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use DateTime;
 
 class HabitController extends AbstractController 
 {
-    public function __construct(HabitServiceInterface $habitServiceInterface, Security $security){
+    public function __construct(HabitServiceInterface $habitServiceInterface, HabitStatsServiceInterface $habitStatsServiceInterface, Security $security){
         $this->habitServiceInterface = $habitServiceInterface;
+        $this->habitStatsServiceInterface = $habitStatsServiceInterface;
         $this->security = $security;
     }
 
@@ -55,6 +57,8 @@ class HabitController extends AbstractController
                     'message' => 'User not authenticated.',
                 ], 400);
             }
+            
+            $habit->setWeekDays(array_values($habit->getWeekDays()));
 
             $habit->setCreatedAt(new \DateTime());
 
@@ -65,6 +69,8 @@ class HabitController extends AbstractController
             }
 
             $this->habitServiceInterface->save($habit);
+
+            $stats = $this->habitStatsServiceInterface->getUserHabitStats();
 
             return new JsonResponse([
                 'status' => 'success',
@@ -78,6 +84,7 @@ class HabitController extends AbstractController
                     'time' => $habit->getTime(),
                 ],
                 'message' => 'Habit successfully created!',
+                'stats' => $stats,
             ]);
         }
 
@@ -145,8 +152,10 @@ class HabitController extends AbstractController
                 if (!$hasTime) {
                 $habit->setTime(null);
                 }
-
+                $habit->setWeekDays(array_values($habit->getWeekDays()));
                 $this->habitServiceInterface->save($habit);
+
+                $stats = $this->habitStatsServiceInterface->getUserHabitStats();
 
                 return new JsonResponse([
                     'status' => 'success',
@@ -159,6 +168,7 @@ class HabitController extends AbstractController
                         'streak' => $habit->getStreak(),
                         'time' => $habit->getTime(),
                     ],
+                    'stats' => $stats,
                     'message' => 'Habit successfully updated!',
                 ]);
             }
@@ -191,10 +201,12 @@ class HabitController extends AbstractController
         }
         try{
             $this->habitServiceInterface->delete($habit);
+            $stats = $this->habitStatsServiceInterface->getUserHabitStats();
 
             return new JsonResponse([
                 'status' => 'success',
                 'message' => 'Habit deleted succesfully',
+                'stats' => $stats,
             ], 200);
 
         } catch (\Exception $e){
@@ -245,11 +257,14 @@ class HabitController extends AbstractController
             }
 
             $this->habitServiceInterface->save($habit);
+            $stats = $this->habitStatsServiceInterface->getUserHabitStats();
+
 
             return new JsonResponse([
                 'status' => 'success',
                 'streak' => $habit->getStreak(),
-                'completed' => $completed
+                'completed' => $completed,
+                'stats' => $stats,
             ]);
         } catch (\Exception $e) {
             return new JsonResponse([

@@ -40,16 +40,16 @@ class HabitRepository extends ServiceEntityRepository
     }
 
     public function queryAll($user): array
-    {
-        return $this->createQueryBuilder('habits')
-            ->where('habits.user = :user')
-            ->setParameter('user', $user)
-            ->orderBy('habits.id', 'DESC')
-            ->getQuery()
-            ->getResult();
-    }
+{
+    return $this->createQueryBuilder('habits')
+        ->where('habits.user = :user')
+        ->setParameter('user', $user)
+        ->orderBy('habits.id', 'DESC')
+        ->getQuery()
+        ->getResult();
+}
 
-    public function getAllHabits(): array
+public function getAllHabits(): array
     {
         return $this->createQueryBuilder('habits')
             ->orderBy('habits.id', 'DESC')
@@ -58,64 +58,67 @@ class HabitRepository extends ServiceEntityRepository
     }
 
     
-    public function getTodayHabits($user): array
-    {
-        $today = (new \DateTime())->format('N');
-        $todayDate = (new \DateTime())->format('Y-m-d'); 
-        $currentWeekDay = strtolower((new \DateTime('yesterday'))->format('D'));
+public function getTodayHabits($user): array
+{
+    $today = (new \DateTime())->format('N');
+    $todayDate = (new \DateTime())->format('Y-m-d'); 
 
-        $entityManager = $this->getEntityManager();
-        $conn = $entityManager->getConnection();
 
-        $sql = '
-            SELECT h.*, 
-            CASE
-                WHEN h.time IS NULL THEN \'unscheduled\'
-                WHEN TIME(h.time) >= \'05:00:00\' AND TIME(h.time) < \'12:00:00\' THEN \'morning\'
-                WHEN TIME(h.time) >= \'12:00:00\' AND TIME(h.time) < \'18:00:00\' THEN \'afternoon\'
-                WHEN TIME(h.time) >= \'18:00:00\' AND TIME(h.time) <= \'23:59:59\' THEN \'evening\'
-                ELSE \'night\'
-            END AS time_category,
-            CASE 
-                WHEN JSON_SEARCH(h.completions, \'one\', :today_date) IS NOT NULL THEN true 
-                ELSE false 
-            END AS is_completed
-            FROM habit h 
-            WHERE h.user_id = :user_id
-            AND (h.frequency = :daily
-            OR (h.frequency = :weekdays AND :today BETWEEN 1 AND 5)
-            OR (h.frequency = :weekends AND :today IN (6,7))
-            OR (h.frequency = :days AND JSON_CONTAINS(h.week_days, CONCAT(\'"\',:current_weekday,\'"\'), \'$\')))
-            ORDER BY h.time ASC
-        ';
+    $currentWeekDay = strtolower((new \DateTime())->format('D'));
 
-        $stmt = $conn->prepare($sql);
-        $result = $stmt->executeQuery([
-            'user_id' => $user->getId(),
-            'daily' => 'daily',
-            'weekdays' => 'weekdays',
-            'weekends' => 'weekends',
-            'days' => 'days',
-            'today' => $today,
-            'current_weekday' => $currentWeekDay,
-            'today_date' => $todayDate,
-        ]);
+    $entityManager = $this->getEntityManager();
+    $conn = $entityManager->getConnection();
 
-        $habits = $result->fetchAllAssociative();
+    $sql = '
+        SELECT h.*, 
+        CASE
+            WHEN h.time IS NULL THEN \'unscheduled\'
+            WHEN TIME(h.time) >= \'05:00:00\' AND TIME(h.time) < \'12:00:00\' THEN \'morning\'
+            WHEN TIME(h.time) >= \'12:00:00\' AND TIME(h.time) < \'18:00:00\' THEN \'afternoon\'
+            WHEN TIME(h.time) >= \'18:00:00\' AND TIME(h.time) <= \'23:59:59\' THEN \'evening\'
+            ELSE \'night\'
+        END AS time_category,
+        CASE 
+            WHEN JSON_SEARCH(h.completions, \'one\', :today_date) IS NOT NULL THEN true 
+            ELSE false 
+        END AS is_completed
+        FROM habit h 
+        WHERE h.user_id = :user_id
+        AND (h.frequency = :daily
+        OR (h.frequency = :weekdays AND :today BETWEEN 1 AND 5)
+        OR (h.frequency = :weekends AND :today IN (6,7))
+        OR (h.frequency = :days AND JSON_CONTAINS(h.week_days, CONCAT(\'"\',:current_weekday,\'"\'), \'$\')))
+        ORDER BY h.time ASC
+    ';
 
-        $categorizedHabits = [
-            'morning' => [],
-            'afternoon' => [],
-            'evening' => [],
-            'night' => [],
-            'unscheduled' => []
-        ];
+    $stmt = $conn->prepare($sql);
+    $result = $stmt->executeQuery([
+        'user_id' => $user->getId(),
+        'daily' => 'daily',
+        'weekdays' => 'weekdays',
+        'weekends' => 'weekends',
+        'days' => 'days',
+        'today' => $today,
+        'current_weekday' => $currentWeekDay,
+        'today_date' => $todayDate 
+    ]);
 
-        foreach ($habits as $habit) {
-            $categorizedHabits[$habit['time_category']][] = $habit;
-        }
+    $habits = $result->fetchAllAssociative();
 
-        return $categorizedHabits;
+    $categorizedHabits = [
+        'morning' => [],
+        'afternoon' => [],
+        'evening' => [],
+        'night' => [],
+        'unscheduled' => []
+    ];
+
+    foreach ($habits as $habit) {
+        $categorizedHabits[$habit['time_category']][] = $habit;
     }
+
+    return $categorizedHabits;
+}
     
+   
 }

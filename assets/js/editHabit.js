@@ -1,7 +1,7 @@
 import * as bootstrap from "bootstrap";
 import { toggleWeekDays, toggleTimeEdit } from "./habitFormHelperFunctions/toggleHabitFormFields";
 import { showErrorMessagesEdit } from "./habitFormHelperFunctions/showErrorMessages";
-import { fetchTodayHabits, checkIfToday } from "./habitHelperFunctions";
+import { fetchTodayHabits, checkIfToday, updateStats } from "./habitHelperFunctions";
 import { createHabitElement } from "./createElements/createHabitElement";
 
 const editModal = new bootstrap.Modal(document.getElementById("editHabitModal"));
@@ -64,7 +64,7 @@ async function initializeEditForm(id) {
       const jsonData = JSON.parse(data);
 
       if (jsonData.status === "success") {
-        editModal.hide();
+        /*editModal.hide();*/
 
         // Replace the updated habit element in the list
         const habitElement = document.getElementById(`habit_${jsonData.habit.id}`);
@@ -73,10 +73,12 @@ async function initializeEditForm(id) {
           habitElement.parentNode.replaceChild(newHabit, habitElement);
         }
 
+        updateStats(jsonData.stats);
+
+        console.log(jsonData.stats);
+        console.log(checkIfToday(jsonData.habit));
         // Refresh today's habits if the updated habit is for today
-        if (checkIfToday(jsonData.habit)) {
-          fetchTodayHabits();
-        }
+        fetchTodayHabits();
       } else {
         showErrorMessagesEdit(jsonData);
       }

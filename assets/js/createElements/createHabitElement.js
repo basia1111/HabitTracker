@@ -16,22 +16,10 @@ export function createHabitElement(habit) {
         <p class="habit__data--title">${habit.name}</p>
         <p class="habit__data--category">Category</p>
         <div class="habit__data--wrapper">
-          ${
-            formattedTime
-              ? `<span class="habit__data--time"><i class="fa-regular fa-clock"></i> ${formattedTime}</span>`
-              : ""
-          }
+          ${formattedTime ? `<span class="habit__data--time"><i class="fa-regular fa-clock"></i> ${formattedTime}</span>` : ""}
           <span class="habit__data--reocurance">
             <i class="fa-regular fa-calendar"></i> 
-            ${
-              habit.frequency === "days"
-                ? habit.weekDays
-                    .map(
-                      (day) => `<span class="habit__data--time">${day}</span>`
-                    )
-                    .join("")
-                : habit.frequency
-            }
+            ${habit.frequency === "days" ? habit.weekDays.map((day) => `<span class="habit__data--time">${day}</span>`).join(" ") : habit.frequency}
           </span>
           <span class="habit__data--streak">
             <i class="fa-regular fa-star"></i> ${habit.streak}

@@ -1,6 +1,6 @@
 import * as bootstrap from "bootstrap";
 import { showErrorMessagesDelete } from "./habitFormHelperFunctions/showErrorMessages";
-import { fetchTodayHabits } from "./habitHelperFunctions";
+import { fetchTodayHabits, updateStats } from "./habitHelperFunctions";
 
 // Initialize the delete modal
 const deleteModal = new bootstrap.Modal(document.getElementById("delete-habit-modal"));
@@ -43,6 +43,8 @@ async function handleDelete(id) {
       // Remove habit from the list
       const habitElement = document.getElementById(`habit_${id}`);
       if (habitElement) habitElement.remove();
+      console.log(jsonData.stats);
+      updateStats(jsonData.stats);
 
       // If habit was today, refresh today’s habits
       const todayHabitElement = document.getElementById(`today__habit_${id}`);

@@ -33,10 +33,37 @@ class DashboardController extends AbstractController
         $habits = $this->habitService->findAll($user);
         $todayHabits = $this->habitService->getTodayHabits($user);
 
+        $totalHabits = count($habits);
+        $totalTodayHabits = 0;
+        foreach ($todayHabits as $categoryHabits) {
+            $totalTodayHabits += count($categoryHabits);
+        }
+
+        $longestStreak = 0;
+        $completedHabits = 0;
+
+        foreach ($habits as $habit){
+            if($habit->getStreak() > $longestStreak){
+                $longestStreak = $habit->getStreak();
+            }
+        }
+
+        foreach($todayHabits as $todayHabitCategory){
+            foreach($todayHabitCategory as $habit){
+                if($habit['is_completed']){
+                    $completedHabits++;
+                }
+            }
+        }
+
         return $this->render('dashboard/index.html.twig', [
             'habits' => $habits,
             'todayHabits' => $todayHabits,
             'createHabitForm' => $form->createView(),
+            'totalHabits' => $totalHabits,
+            'totalTodayHabits' =>  $totalTodayHabits,
+            'longestStreak' => $longestStreak,
+            'completedHabits' =>  $completedHabits,
         ]);
     }
 

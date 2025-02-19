@@ -9,7 +9,11 @@
     {% include "dashboard/modals/_edit-habit-modal.html.twig" %}
     {% include "dashboard/modals/_delete-habit-modal.html.twig" %}
     {% include "dashboard/_dashboard-header.html.twig" %}
-    {% include "dashboard/_dashboard_stats.html.twig" %}
+    {% include "dashboard/_dashboard_stats.html.twig"  with {  
+            'totalHabits': totalHabits,
+            'totalTodayHabits' : totalTodayHabits,
+            'longestStreak' : longestStreak,
+            'completedHabits' : completedHabits} %}
     <div id="dashboard-today-wrapper">
     {% include "dashboard/_dashboard-today-habits.html.twig" with {'todayHabits' : todayHabits} %}
     </div>

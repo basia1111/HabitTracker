@@ -62,3 +62,20 @@ export async function fetchTodayHabits() {
     console.error("Error fetching habits:", error);
   }
 }
+
+// Function to update use stars after modyfying habit/habit list
+export function updateStats(stats) {
+  console.log(stats.completedHabits, stats.totalTodayHabits);
+
+  const statTodayHaits = document.getElementById("stat__total-habits");
+  statTodayHaits.innerText = stats.totalHabits;
+
+  const statCompletedTodayHaits = document.getElementById("stat__progress");
+  statCompletedTodayHaits.innerText = `${stats.completedHabits} / ${stats.totalTodayHabits}`;
+
+  const statLongestStreak = document.getElementById("stat__longest-streak");
+  statLongestStreak.innerText = `${stats.longestStreak}`;
+
+  const statCompletionRate = document.getElementById("stat__completion-rate");
+  statCompletionRate.innerText = `${((stats.completedHabits / stats.totalTodayHabits) * 100).toFixed(0)}%`;
+}

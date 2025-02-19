@@ -1,7 +1,7 @@
 import { createHabitElement } from "./createElements/createHabitElement";
 import { showErrorMessagesCreate } from "./habitFormHelperFunctions/showErrorMessages";
 import { toggleWeekDays, toggleTime } from "./habitFormHelperFunctions/toggleHabitFormFields";
-import { fetchTodayHabits, checkIfToday } from "./habitHelperFunctions";
+import { fetchTodayHabits, checkIfToday, updateStats } from "./habitHelperFunctions";
 
 const createForm = document.getElementById("habit-create-form");
 const habitList = document.getElementById("dashboard-all-list");
@@ -26,8 +26,13 @@ createForm.addEventListener("submit", async (event) => {
       const newHabit = createHabitElement(data.habit);
       habitList.prepend(newHabit);
 
+      updateStats(data.stats);
+
       // If the habit is for today, refresh today's habits list
-      if (checkIfToday(data.habit)) fetchTodayHabits();
+      console.log(checkIfToday(data.habit));
+      if (checkIfToday(data.habit)) {
+        fetchTodayHabits();
+      }
     } else {
       showErrorMessagesCreate(data);
     }

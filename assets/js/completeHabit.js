@@ -1,3 +1,5 @@
+import { updateStats } from "./habitHelperFunctions";
+
 document.getElementById("dashboard-today-wrapper").addEventListener("click", async (e) => {
   const checkbox = e.target.closest(".habit__checkbox");
 
@@ -25,6 +27,8 @@ document.getElementById("dashboard-today-wrapper").addEventListener("click", asy
         } else {
           habitElement.classList.remove("habit--completed");
         }
+
+        updateStats(data.stats);
       } else {
         console.error("Failed to update habit:", data.message);
       }
