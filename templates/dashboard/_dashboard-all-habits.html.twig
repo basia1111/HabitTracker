@@ -1,14 +1,23 @@
 <div class="dashboard-all">
-    <h1> All habits </h1>
+    <h1>All habits</h1>
 
     <div id="dashboard-all-list">
     {% if habits|length > 0 %}
         {% for habit in habits %}
             {% include "dashboard/_dashboard-all-habit.html.twig" with {'habit': habit} %}
         {% endfor %}
-
     {% else %}
-        <p>No habits found.</p>
+        <div id="dashboard-all__empty" class="dashboard-all__empty">
+            <div class="dashboard-all__empty-content">
+                <i class="bi bi-list-check dashboard-all__empty-icon"></i>
+                <h2>Start your journey</h2>
+                <p>Create your first habit and begin tracking your progress</p>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#createHabitModal">
+                    <i class="fa-regular fa-plus"></i>
+                    New Habit
+                </button>
+            </div>
+        </div>
     {% endif %}
     </div>
 </div>

@@ -1,6 +1,6 @@
 <div class="dashboard-today">
-    
-    {% set categories = {
+    {% set hasHabits = false %}
+     {% set categories = {
         'morning': {
             'icon': 'bi bi-sun',
             'title': 'Morning'
@@ -22,9 +22,10 @@
             'title': 'Unscheduled'
         }
     } %}
-
+    
     {% for category, config in categories %}
         {% if todayHabits[category]|length > 0 %}
+            {% set hasHabits = true %}
             <div class="dashboard-today__{{ category }} dashboard-today__category">
                 <h2><i class="{{ config.icon }}"></i> {{ config.title }}</h2>
                 {% for habit in todayHabits[category] %}
@@ -33,4 +34,14 @@
             </div>
         {% endif %}
     {% endfor %}
+
+    {% if not hasHabits %}
+        <div class="dashboard-today__empty">
+            <div class="dashboard-today__empty-content">
+                <i class="bi bi-journal-check dashboard-today__empty-icon"></i>
+                <h3>No habits scheduled for today</h3>
+                <p>Click the "New Habit" button to start building your routine</p>
+            </div>
+        </div>
+    {% endif %}
 </div>

@@ -11,4 +11,32 @@
       padding-right: 3px;
     }
   }
+  &__empty {
+    padding: 3rem 2rem;
+    text-align: center;
+    &-content {
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    &-icon {
+      @include responsive-font-size($font-size-32, $font-size-20);
+      color: $text-helper;
+      margin-bottom: 16px;
+    }
+
+    h3 {
+      @include responsive-font-size($font-size-18, $font-size-16);
+      color: $accent-dark;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    p {
+      @include responsive-font-size($font-size-14, $font-size-12);
+      color: $text-helper;
+      line-height: 1.5;
+      margin: 0;
+    }
+  }
 }

@@ -23,6 +23,10 @@ createForm.addEventListener("submit", async (event) => {
       document.getElementById("closeCreateHabitModal").click();
 
       // Create the new habit element and add it to the list
+      if (document.getElementById("dashboard-all__empty")) {
+        document.getElementById("dashboard-all__empty").remove();
+        console.log("removed");
+      }
       const newHabit = createHabitElement(data.habit);
       habitList.prepend(newHabit);
 

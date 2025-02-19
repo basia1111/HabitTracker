@@ -46,6 +46,22 @@ async function handleDelete(id) {
       console.log(jsonData.stats);
       updateStats(jsonData.stats);
 
+      if (jsonData.stats.totalHabits === 0) {
+        document.getElementById("dashboard-all-list").innerHTML = `
+        <div id="dashboard-all__empty" class="dashboard-all__empty">
+            <div class="dashboard-all__empty-content">
+                <i class="bi bi-list-check dashboard-all__empty-icon"></i>
+                <h2>Start your journey</h2>
+                <p>Create your first habit and begin tracking your progress</p>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#createHabitModal">
+                    <i class="fa-regular fa-plus"></i>
+                    New Habit
+                </button>
+            </div>
+        </div>
+        `;
+      }
+
       // If habit was today, refresh today’s habits
       const todayHabitElement = document.getElementById(`today__habit_${id}`);
       if (todayHabitElement) fetchTodayHabits();

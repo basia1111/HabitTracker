@@ -1,8 +1,60 @@
 .dashboard-all {
   @include flex(column, center, stretch, 20px);
   padding-top: 30px;
+
   h1 {
     @include responsive-font-size($font-size-24, $font-size-20);
     font-weight: 700;
+    color: $text-primary-dark;
+  }
+
+  .dashboard-all__empty {
+    background: $bg-white;
+    border-radius: 16px;
+    padding: 64px 32px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid $border-card;
+
+    &-content {
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    &-icon {
+      @include responsive-font-size($font-size-32, $font-size-20);
+      color: $text-helper;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      @include responsive-font-size($font-size-20, $font-size-16);
+      color: $text-primary-dark;
+      font-weight: 600;
+      margin: 0 0 12px 0;
+    }
+
+    p {
+      @include responsive-font-size($font-size-14, $font-size-12);
+      color: $text-helper;
+      line-height: 1.5;
+      margin: 0 0 24px 0;
+    }
+
+    button {
+      @extend %button-dark-styles;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .dashboard-all {
+    &__empty {
+      padding: 48px 24px;
+      margin: 16px 0;
+    }
   }
 }
