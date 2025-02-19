@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Form\HabitFormType;
 use App\Entity\Habit;
 use App\Interface\HabitServiceInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,10 +14,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class DashboardController extends AbstractController
 {
     private HabitServiceInterface $habitService;
+    private HttpClientInterface $httpClient;
+    private string $weatherApiKey;
 
-    public function __construct(HabitServiceInterface $habitService)
+    public function __construct(HabitServiceInterface $habitService, HttpClientInterface $httpClient)
     {
         $this->habitService = $habitService;
+        $this->httpClient = $httpClient;
+        $this->weatherApiKey = $_ENV['WEATHER_API_KEY']; 
     }
 
     #[Route('/', name: 'app_main')]
@@ -82,7 +88,36 @@ class DashboardController extends AbstractController
             'todayHabits' => $todayHabits,
         ]);
     
-        return $this->json(['html' => $htmlContent]);
+        return new JsonResponse(['html' => $htmlContent]);
     }
-    
+
+    #[Route('/api/weather', name: 'api_weather', methods:'GET')]
+    public function getWeather(): Response
+    {
+        try{
+        $locationResponse = $this->httpClient->request('GET', "https://geolocation-db.com/json/");
+        $locationData = $locationResponse->toArray();
+        $city = $locationData['city'] ?? 'unknown';
+
+        $weatherResponse = $this->httpClient->request('GET', "https://api.openweathermap.org/data/2.5/weather?q=".$city."&appid=".$this->weatherApiKey);
+        $weatherData = $weatherResponse->toArray();
+        $weather_description = $weatherData['weather'][0]['description'];
+        $weather_temperature =  round($weatherData['main']['temp'] -  273.15, 2);
+        $weather_icon =  $weatherData['weather'][0]['icon'];
+
+        return new JsonResponse([
+            'status' => 'success',
+            'city' => $city,
+            'desc' =>  $weather_description,
+            'icon' => $weather_icon,
+            'temp' => $weather_temperature 
+        ], 200);
+
+        } catch (\Exception $e) {
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => 'Data not avaliable'
+            ], 500);
+        }
+    }   
 }
