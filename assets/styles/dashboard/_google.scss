@@ -65,11 +65,9 @@
   }
 }
 
-// Banner styles adjusted to match Google Calendar
 .google-status-banner {
   @include shadow();
-  background-color: #4d6eb930; // Light background like Google Calendar
-  border: 1px solid $accent-light; // Google's border color
+  background-color: $accent-dark-hover;
   border-radius: 8px;
   padding: 12px 16px;
   margin-bottom: 16px;
@@ -82,12 +80,12 @@
 
   &__icon {
     font-size: 18px;
-    color: $accent-light; // Google Blue
+    color: $text-white;
   }
 
   &__text {
     font-size: 14px;
-    color: $accent-light; // Google's text color
+    color: $text-white;
     font-weight: 500;
     line-height: 20px;
   }
@@ -102,8 +100,11 @@
 
 #google-calendar-view {
   margin: 20px 0 30px 0;
+  @extend %card-style;
+  @include shadow();
+  padding: 20px;
+  border-radius: 12px;
   iframe {
-    @include shadow();
     border-radius: 10px;
   }
 }
@@ -114,16 +115,13 @@
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
-  background: white;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   gap: 1rem;
 
   .loading-spinner {
     width: 2rem;
     height: 2rem;
     border: 4px solid #e5e7eb;
-    border-top-color: #4d6eb9;
+    border-top-color: $accent-dark;
     border-radius: 50%;
     animation: spin 1s linear infinite;
   }
@@ -134,12 +132,12 @@
     gap: 0.5rem;
     font-size: 0.875rem;
     font-weight: 500;
-    color: #374151;
+    color: $accent-dark;
 
     .calendar-icon {
       width: 1.25rem;
       height: 1.25rem;
-      fill: #4d6eb9;
+      fill: $accent-dark;
     }
   }
 
@@ -156,8 +154,4 @@
   to {
     transform: rotate(360deg);
   }
-}
-
-#yDmH0d .O0O81b {
-  background: #4d6eb930 !important;
 }

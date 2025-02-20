@@ -18,9 +18,9 @@
     <div id="dashboard-today-wrapper">
     {% include "dashboard/_dashboard-today-habits.html.twig" with {'todayHabits' : todayHabits} %}
     </div>
+    {% include "dashboard/_dashboard-all-habits.html.twig" with {'habits': habits} %}
     {% include "dashboard/_calendar-wrapper.html.twig" %}
 
-    {% include "dashboard/_dashboard-all-habits.html.twig" with {'habits': habits} %}
 </div>
 {% endblock %}
 
