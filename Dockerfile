@@ -1,6 +1,5 @@
 FROM php:8.2-apache
 
-# Install system dependencies including Node.js
 RUN apt-get update && apt-get install -y \
     libzip-dev \
     zip \
@@ -11,7 +10,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN a2enmod rewrite
 
-# Enable PHP error reporting
+
 RUN echo "display_errors=1\n" >> /usr/local/etc/php/conf.d/docker-php-ext-error.ini && \
     echo "display_startup_errors=1\n" >> /usr/local/etc/php/conf.d/docker-php-ext-error.ini && \
     echo "error_reporting=E_ALL\n" >> /usr/local/etc/php/conf.d/docker-php-ext-error.ini
@@ -32,7 +31,11 @@ RUN composer install --no-dev --no-scripts
 RUN npm install
 RUN npm run build
 
+
+RUN php bin/console doctrine:migrations:migrate --no-interaction
+
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+
 
 RUN chown -R www-data:www-data var/ public/
