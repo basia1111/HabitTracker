@@ -23,7 +23,7 @@ security:
         default_target_path: /
       oauth:
         resource_owners:
-          google: "/connect/google/check"
+          google: "%env(OAUTH_GOOGLE_CALLBACK_URL)%"
         login_path: /login
         use_forward: false
         failure_path: /login
