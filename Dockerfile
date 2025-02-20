@@ -10,10 +10,9 @@ RUN apt-get update && apt-get install -y \
 
 RUN a2enmod rewrite
 
-# Configure PHP sessions correctly (using proper PHP config)
+# Configure PHP sessions correctly
 RUN echo "session.cookie_httponly=1" >> /usr/local/etc/php/conf.d/sessions.ini && \
-    echo "session.use_only_cookies=1" >> /usr/local/etc/php/conf.d/sessions.ini && \
-    echo "session.cookie_secure=1" >> /usr/local/etc/php/conf.d/sessions.ini
+    echo "session.use_only_cookies=1" >> /usr/local/etc/php/conf.d/sessions.ini
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
@@ -22,18 +21,27 @@ COPY . .
 
 RUN echo "APP_ENV=prod" > .env
 
-# Create directories and set permissions
-RUN mkdir -p var/cache var/sessions && \
-    chmod -R 777 var
+# Create directories
+RUN mkdir -p var/cache var/sessions var/log
 
+# Install dependencies
 RUN composer install --no-dev --no-scripts
 
 # Install npm dependencies and build assets
 RUN npm install
 RUN npm run build
 
-# Create startup script with session directory fix
-RUN echo '#!/bin/bash\nphp bin/console doctrine:migrations:migrate --no-interaction\nchmod -R 777 var/sessions\napache2-foreground' > /usr/local/bin/startup.sh
+# Create startup script with proper permission fixes
+RUN echo '#!/bin/bash\n\
+php bin/console doctrine:migrations:migrate --no-interaction\n\
+# Clear cache as root first\n\
+php bin/console cache:clear\n\
+# Set proper permissions\n\
+chown -R www-data:www-data var\n\
+chmod -R 777 var\n\
+# Start Apache\n\
+apache2-foreground' > /usr/local/bin/startup.sh
+
 RUN chmod +x /usr/local/bin/startup.sh
 
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
