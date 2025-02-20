@@ -9,7 +9,7 @@ use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 
-class MyUserProvider implements OAuthAwareUserProviderInterface
+class MySecurityProvider implements OAuthAwareUserProviderInterface
 {
     private $entityManager;
     private $security;
