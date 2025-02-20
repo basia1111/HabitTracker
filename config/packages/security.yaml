@@ -29,7 +29,7 @@ security:
         failure_path: /login
         default_target_path: /
         oauth_user_provider:
-          service: App\Security\MyUserProvider
+          service: App\Security\MySecurityProvider
       logout:
         path: app_logout
         target: app_login
