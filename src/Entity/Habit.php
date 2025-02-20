@@ -45,6 +45,20 @@ class Habit
     #[ORM\Column(type: 'json')]
     private array $completions = [];  
 
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $googleEventId = null;
+
+    public function getGoogleEventId(): ?string
+    {
+        return $this->googleEventId;
+    }
+
+    public function setGoogleEventId(?string $googleEventId): self
+    {
+        $this->googleEventId = $googleEventId;
+        return $this;
+    }
+
     public function getId(): ?int { 
         return $this->id; 
     }

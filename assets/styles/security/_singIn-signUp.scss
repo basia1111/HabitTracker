@@ -2,25 +2,45 @@
   @include flex(row, center, center);
   padding: 50px 20px;
   min-height: 60vh;
-}
 
-.security__wrapper {
-  @include flex(column, center, stretch);
-  @extend %card-style;
-  max-width: 500px;
-  width: 100%;
-  padding: 24px;
-}
+  &__wrapper {
+    @include flex(column, center, stretch);
+    @extend %card-style;
+    max-width: 500px;
+    width: 100%;
+    padding: 24px;
 
-.security__wrapper h1 {
-  @extend %h1-style;
-  text-align: center;
-}
+    h1 {
+      @extend %h1-style;
+      text-align: center;
+    }
+    h1 + p {
+      @include responsive-font-size($font-size-16, $font-size-14);
+      text-align: center;
+      color: $text-helper;
+    }
+  }
 
-.security__wrapper h1 + p {
-  @include responsive-font-size($font-size-16, $font-size-14);
-  text-align: center;
-  color: $text-helper;
+  &__bottomLink {
+    @extend %text-muted;
+    text-align: center;
+    padding-top: 20px;
+
+    a {
+      @extend %action-link-styles;
+    }
+  }
+
+  &__forgot-password {
+    @extend %action-link-styles;
+    @include responsive-font-size($font-size-14, $font-size-14);
+    color: $text-primary-dark !important;
+    font-weight: 500;
+    display: block;
+    width: 100%;
+    text-align: right;
+    padding-bottom: 20px;
+  }
 }
 
 .securityForm__input {
@@ -39,25 +59,4 @@ input.securityForm__input + label {
 .securityForm__submit {
   @extend %button-dark-styles;
   width: 100%;
-}
-
-.security__bottomLink {
-  @extend %text-muted;
-  text-align: center;
-  padding-top: 20px;
-}
-
-.security__bottomLink a {
-  @extend %action-link-styles;
-}
-
-.security__forgot-password {
-  @extend %action-link-styles;
-  @include responsive-font-size($font-size-14, $font-size-14);
-  color: $text-primary-dark !important;
-  font-weight: 500;
-  display: block;
-  width: 100%;
-  text-align: right;
-  padding-bottom: 20px;
 }

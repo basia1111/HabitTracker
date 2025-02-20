@@ -64,3 +64,36 @@
     }
   }
 }
+
+.google-status-banner {
+  @include shadow();
+  background-color: $accent-dark;
+  border: 1px solid $border-card;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 20px;
+
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__icon {
+    font-size: 20px;
+    color: $accent-light;
+  }
+
+  &__text {
+    font-size: 14px;
+    color: $text-white;
+    font-weight: 500;
+  }
+}
+
+@media (max-width: 640px) {
+  .google-status-banner {
+    padding: 12px;
+    margin-bottom: 16px;
+  }
+}

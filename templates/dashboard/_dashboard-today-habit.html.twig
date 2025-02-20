@@ -1,14 +1,13 @@
- <div class="habit today {% if habit.is_completed %}habit--completed{% endif %}" id="today__habit_{{habit.id}}">
-    <div class="habit__left-side">
-        <div class="habit__color color_{{habit.color}}" > </div>
-        <div class="habit__checkbox" > </div>
-        <div class="habit__data" > 
-            <p class="habit__data--title" > {{habit.name}} </p>
-           
-        </div>
+<div class="habit-today {% if habit.is_completed %} habit-today--completed {% endif %}" id="today__habit_{{habit.id}}">
+    <div class="habit-today__left-side">
+        <div class="habit-today__color color_{{habit.color}}"></div>
+        <div class="habit-today__checkbox" data-id="{{habit.id}}"></div>
+        <p class="habit-today__title">{{habit.name}}</p>
     </div>
-    <div class="habit__right-side">
-     {% if habit.time %}<span class="habit__data--time"><i class="fa-regular fa-clock"></i> {{habit.time|date('H:i')}} </span> {%endif%}
-        <div class="habit__data--streak"  data-id="{{habit.id}}"><i class="fa-regular fa-star"></i>  {{habit.streak}} </div>
+    <div class="habit-today__right-side">
+        {% if habit.time %}
+            <span class="habit-today__data--time"><i class="fa-regular fa-clock"></i> {{ habit.time|date('H:i') }}</span>
+        {% endif %}
+        <span class="habit-today__data--streak" data-id="{{habit.id}}"><i class="fa-regular fa-star"></i> {{habit.streak}}</span>
     </div>
 </div>

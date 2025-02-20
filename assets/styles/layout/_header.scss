@@ -1,48 +1,49 @@
 .header {
   width: 100%;
-}
-.header__nav {
-  padding: 24px 32px;
-  @include flex(row, space-between, center);
-  background-color: $bg-white;
-  border-bottom: 1px solid $border-card;
-  @media (max-width: 768px) {
-    padding: 24px 15px;
+
+  &__nav {
+    padding: 24px 32px;
+    @include flex(row, space-between, center);
+    background-color: $bg-white;
+    border-bottom: 1px solid $border-card;
+    @media (max-width: 768px) {
+      padding: 24px 15px;
+    }
+  }
+  &__brand {
+    @include responsive-font-size($font-size-20, $font-size-16);
+    @include flex(row, start, center, 10px);
+    @extend %link-styles;
+    color: $accent-dark;
+    font-weight: 800;
+    i {
+      @include responsive-font-size($font-size-24, $font-size-20);
+    }
   }
 }
-.header__brand {
-  @include responsive-font-size($font-size-20, $font-size-16);
-  @include flex(row, start, center, 10px);
-  @extend %link-styles;
-  color: $accent-dark;
-  font-weight: 800;
-  i {
-    @include responsive-font-size($font-size-24, $font-size-20);
-  }
-}
+
 .header__menu {
   @include flex(row, end, center, 10px);
 
-  .header__user {
+  &--user {
     @include responsive-font-size($font-size-14, $font-size-14);
     padding-right: 30px;
     @media (max-width: 767px) {
       display: none;
     }
-    .header__user--label {
+    &-label {
       color: $accent-dark;
       font-weight: 600;
       margin: 0;
       text-align: right;
     }
-    .header__user--content {
+    &-content {
       color: $text-secondary-dark;
       margin: 0;
       text-align: right;
     }
   }
-
-  .header__logout {
+  &--logout {
     @extend %link-styles;
     @include responsive-font-size($font-size-16, $font-size-14);
     background-color: $bg-white;
@@ -52,7 +53,8 @@
       color: $text-secondary-dark;
     }
   }
-  .header__login {
+
+  &--login {
     @extend %button-styles;
     @extend %link-styles;
     @include responsive-font-size($font-size-16, $font-size-14);
@@ -63,7 +65,8 @@
       background-color: $bg-gray;
     }
   }
-  .header__register {
+
+  &--register {
     @extend %button-styles;
     @extend %link-styles;
     @include responsive-font-size($font-size-16, $font-size-14);

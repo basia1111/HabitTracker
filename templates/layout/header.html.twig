@@ -6,19 +6,19 @@
     </a>
     <div class="header__menu">
       {% if app.user %}
-        <div class="header__user">
-          <p class="header__user--label">User</p>
-          <p class="header__user--content">{{app.user.email}}</p>
+        <div class="header__menu--user">
+          <p class="header__menu--user-label">User</p>
+          <p class="header__menu--user-content">{{app.user.email}}</p>
         </div>
-        <a href="{{ path('app_logout') }}" class="header__logout">
+        <a href="{{ path('app_logout') }}" class="header__menu--logout">
           <i class="fa-solid fa-arrow-right-from-bracket"></i>
           Logout
         </a>
       {% else %}
-        <a href="{{ path('app_login') }}" class="header__login">
+        <a href="{{ path('app_login') }}" class="header__menu--login">
           Login
         </a>
-        <a href="{{ path('app_register') }}" class="header__register">
+        <a href="{{ path('app_register') }}" class="header__menu--register">
           Register
         </a>
       {% endif %}

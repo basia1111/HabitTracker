@@ -43,7 +43,6 @@ async function handleDelete(id) {
       // Remove habit from the list
       const habitElement = document.getElementById(`habit_${id}`);
       if (habitElement) habitElement.remove();
-      console.log(jsonData.stats);
       updateStats(jsonData.stats);
 
       if (jsonData.stats.totalHabits === 0) {

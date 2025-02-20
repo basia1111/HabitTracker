@@ -35,24 +35,27 @@
       color: $text-helper;
     }
   }
-}
-.footer__content,
-.footer__content--left {
-  @include flex(row, space-between, top, 30px);
-}
-.footer__techStack {
-  padding: 30px 0;
-  ul {
-    @include flex(row, start, center, 15px);
-    a {
-      background-color: #1f2937;
-      padding: 6px 15px;
-      border-radius: 50px;
+
+  &__content,
+  &__content--left {
+    @include flex(row, space-between, top, 30px);
+  }
+
+  &__techStack {
+    padding: 30px 0;
+    ul {
+      @include flex(row, start, center, 15px);
+      a {
+        background-color: #1f2937;
+        padding: 6px 15px;
+        border-radius: 50px;
+      }
     }
   }
-}
-.footer__copyright {
-  color: $text-helper;
-  @include responsive-font-size($font-size-14, $font-size-14);
-  @include flex(row, space-between, top, 30px);
+
+  &__copyright {
+    color: $text-helper;
+    @include responsive-font-size($font-size-14, $font-size-14);
+    @include flex(row, space-between, top, 30px);
+  }
 }
