@@ -3,6 +3,7 @@
 namespace App\Interface;
 
 use App\Entity\Habit;
+use App\Entity\User;
 
 interface HabitServiceInterface
 {
@@ -10,9 +11,11 @@ interface HabitServiceInterface
 
     public function delete(Habit $habit): void;
     
-    public function findAll($user): array;
+    public function findAll(User $user): array;
 
-    public function getTodayHabits($user): array;
+    public function getTodayHabits(User $user): array;
 
     public function getAllHabits(): array;
+
+    public function createGoogleRecurrenceRule(Habit $habit): string;
 }

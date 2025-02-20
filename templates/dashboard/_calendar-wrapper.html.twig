@@ -1,0 +1,17 @@
+
+{% if app.user %}
+        {% if app.user.googleCalendarId %}
+            <div id="google-calendar-view">
+                <div class="google-calendar-loading">
+                    <div class="loading-spinner"></div>
+                    <div class="loading-message">
+                        <svg class="calendar-icon" viewBox="0 0 24 24">
+                            <path d="M19,4H5C3.895,4,3,4.895,3,6v12c0,1.105,0.895,2,2,2h14c1.105,0,2-0.895,2-2V6C21,4.895,20.105,4,19,4z M19,18H5V8h14V18z"/>
+                        </svg>
+                        <span>Connecting to Google Calendar...</span>
+                    </div>
+                    <p class="loading-status">This may take a few moments</p>
+                </div>
+            </div>
+        {% endif %}
+            {% endif %}

@@ -55,6 +55,24 @@
       background-color: #e7eaf170;
     }
   }
+
+  .habit-all__calendar button {
+    color: $accent-dark;
+    border: none;
+    background: none;
+    padding: 0;
+    border-radius: 0;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .habit-all__calendar button:hover {
+    color: $text-helper;
+  }
+  .remove-from-calendar {
+    margin-left: 15px;
+  }
 }
 
 .habit-today {
@@ -107,37 +125,37 @@
   background-color: #ffffff;
 }
 .color_1 {
-  background-color: #a4bdfc;
+  background-color: #7986cb; /* Lavender */
 }
 .color_2 {
-  background-color: #7ae7bf;
+  background-color: #33b679; /* Sage */
 }
 .color_3 {
-  background-color: #dbadff;
+  background-color: #8e24aa; /* Grape */
 }
 .color_4 {
-  background-color: #ff887c;
+  background-color: #e67c73; /* Flamingo */
 }
 .color_5 {
-  background-color: #fbd75b;
+  background-color: #f6bf26; /* Banana */
 }
 .color_6 {
-  background-color: #ffb878;
+  background-color: #f4511e; /* Tangerine */
 }
 .color_7 {
-  background-color: #46d6db;
+  background-color: #039be5; /* Peacock */
 }
 .color_8 {
-  background-color: #e1e1e1;
+  background-color: #616161; /* Graphite */
 }
 .color_9 {
-  background-color: #5484ed;
+  background-color: #3f51b5; /* Blueberry */
 }
 .color_10 {
-  background-color: #51b749;
+  background-color: #0b8043; /* Basil */
 }
 .color_11 {
-  background-color: #dc2127;
+  background-color: #d50000; /* Tomato */
 }
 
 .habit-today--completed {

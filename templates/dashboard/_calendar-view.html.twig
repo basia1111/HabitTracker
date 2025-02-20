@@ -1,0 +1,16 @@
+<div class="calendar-container">
+    {% if embedUrl %}
+        <iframe 
+            src="{{ embedUrl }}"
+            style="border: 0" 
+            width="800" 
+            height="600" 
+            frameborder="0" 
+            scrolling="no"
+        ></iframe>
+    {% else %}
+        <div class="calendar-error">
+            <p>Calendar not available. Please make sure your Google Calendar is properly connected.</p>
+        </div>
+    {% endif %}
+</div>

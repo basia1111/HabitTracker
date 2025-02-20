@@ -8,6 +8,7 @@ document.getElementById("dashboard-today-wrapper").addEventListener("click", asy
     const todayHabitElement = checkbox.closest(".habit-today");
     const habitId = checkbox.dataset.id;
 
+    console.log(todayHabitElement);
     try {
       const response = await fetch(`/habit/complete/${habitId}`, {
         method: "POST",
@@ -18,8 +19,11 @@ document.getElementById("dashboard-today-wrapper").addEventListener("click", asy
 
       if (data.status === "success") {
         // Update streak display
+        console.log(todayHabitElement);
         todayHabitElement.querySelector(".habit-today__data--streak").innerHTML = `<i class="fa-regular fa-star"></i> ${data.streak}`;
-        document.querySelector(`#habit_${habitId} .habit__data--streak`).innerHTML = `<i class="fa-regular fa-star"></i> ${data.streak}`;
+        document.querySelector(`#habit_${habitId} .habit-all__streak`).innerHTML = `<i class="fa-regular fa-star"></i> ${data.streak}`;
+
+        console.log(todayHabitElement);
 
         // Toggle checked style
         if (data.completed) {

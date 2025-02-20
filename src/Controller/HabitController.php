@@ -13,13 +13,15 @@ use App\Interface\HabitStatsServiceInterface;
 use App\Interface\HabitServiceInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use DateTime;
+use App\Service\GoogleCalendarService;
 
 class HabitController extends AbstractController 
 {
-    public function __construct(HabitServiceInterface $habitServiceInterface, HabitStatsServiceInterface $habitStatsServiceInterface, Security $security){
+    public function __construct(HabitServiceInterface $habitServiceInterface, HabitStatsServiceInterface $habitStatsServiceInterface, Security $security, GoogleCalendarService $googleCalendarService){
         $this->habitServiceInterface = $habitServiceInterface;
         $this->habitStatsServiceInterface = $habitStatsServiceInterface;
         $this->security = $security;
+        $this->googleCalendarService = $googleCalendarService;
     }
 
     /**
@@ -82,6 +84,7 @@ class HabitController extends AbstractController
                     'color' => $habit->getColor(),
                     'streak' => $habit->getStreak(),
                     'time' => $habit->getTime(),
+                    
                 ],
                 'message' => 'Habit successfully created!',
                 'stats' => $stats,
@@ -155,6 +158,13 @@ class HabitController extends AbstractController
                 $habit->setWeekDays(array_values($habit->getWeekDays()));
                 $this->habitServiceInterface->save($habit);
 
+                $user = $this->security->getUser();
+
+                if ($habit->getGoogleEventId() && $user->getGoogleCalendarId()) {
+                    $result = $this->googleCalendarService->updateHabitInCalendar($user, $habit);
+                }
+                
+
                 $stats = $this->habitStatsServiceInterface->getUserHabitStats();
 
                 return new JsonResponse([
@@ -167,6 +177,7 @@ class HabitController extends AbstractController
                         'color' => $habit->getColor(),
                         'streak' => $habit->getStreak(),
                         'time' => $habit->getTime(),
+                        'googleEventId' => $habit->getGoogleEventId(),
                     ],
                     'stats' => $stats,
                     'message' => 'Habit successfully updated!',
@@ -193,13 +204,16 @@ class HabitController extends AbstractController
     /**
      * Delete habit
      */
-
     #[Route('habit/delete/{id}', name: "habit_delete", methods: ['DELETE'])]
     public function habitDelete(Request $request, Habit $habit){
         if($response = $this->checkHabitOwnership($habit)){
             return $response;
         }
         try{
+
+            $googleEventId = $habit->getGoogleEventId();
+
+            $this->googleCalendarService->removeFromCalendar($this->security->getUser(), $habit);
             $this->habitServiceInterface->delete($habit);
             $stats = $this->habitStatsServiceInterface->getUserHabitStats();
 
@@ -207,6 +221,7 @@ class HabitController extends AbstractController
                 'status' => 'success',
                 'message' => 'Habit deleted succesfully',
                 'stats' => $stats,
+                'googleEventId' => $googleEventId,
             ], 200);
 
         } catch (\Exception $e){
@@ -217,28 +232,9 @@ class HabitController extends AbstractController
         }
     }
 
-
-    private function checkHabitOwnership(Habit $habit):?JsonResponse
-    {
-        $user = $this->security->getUser();
-        if (!$user) {
-            return new JsonResponse([
-                'status' => 'error',
-                'message' => 'User not authenticated.',
-            ], 403);
-        } 
-         
-        if($user->getId() !== $habit->getUser()->getId()) {
-            return new JsonResponse([
-                'status' => 'error',
-                'message' =>  'You do not have permission to change this habit.',
-            ], 403);
-        }
-
-        return null;
-
-    }
-
+    /**
+     * Toggle habit status
+     */
     #[Route('/habit/complete/{id}', methods: ['POST'])]
     public function toggleCompletion(Habit $habit): JsonResponse
     {
@@ -272,5 +268,29 @@ class HabitController extends AbstractController
                 'message' => $e->getMessage()
             ], 500);
         }
+    }
+
+    /**
+     * Check habit ownership
+     */
+    private function checkHabitOwnership(Habit $habit):?JsonResponse
+    {
+        $user = $this->security->getUser();
+        if (!$user) {
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => 'User not authenticated.',
+            ], 403);
+        } 
+         
+        if($user->getId() !== $habit->getUser()->getId()) {
+            return new JsonResponse([
+                'status' => 'error',
+                'message' =>  'You do not have permission to change this habit.',
+            ], 403);
+        }
+
+        return null;
+
     }
 }

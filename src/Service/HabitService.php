@@ -39,4 +39,38 @@ class HabitService implements HabitServiceInterface
     {
         return $this->habitRepository->getTodayHabits($user);
     }
+
+    public function createGoogleRecurrenceRule(Habit $habit): string
+    {
+        $baseRule = 'RRULE:';
+        
+        switch ($habit->getFrequency()) {
+            case 'daily':
+                return $baseRule . 'FREQ=DAILY';
+                
+            case 'weekdays':
+                return $baseRule . 'FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR';
+                
+            case 'weekends':
+                return $baseRule . 'FREQ=WEEKLY;BYDAY=SA,SU';
+                
+            case 'days':
+                $days = array_map(function($day) {
+                    return match(strtolower($day)) {
+                        'mon' => 'MO',
+                        'tue' => 'TU',
+                        'wed' => 'WE',
+                        'thu' => 'TH',
+                        'fri' => 'FR',
+                        'sat' => 'SA',
+                        'sun' => 'SU',
+                    };
+                }, $habit->getWeekDays());
+                
+                return $baseRule . 'FREQ=WEEKLY;BYDAY=' . implode(',', $days);
+                
+            default:
+                return $baseRule . 'FREQ=DAILY';
+        }
+    }
 }

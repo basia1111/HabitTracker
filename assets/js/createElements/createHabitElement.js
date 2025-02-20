@@ -33,12 +33,23 @@ export function createHabitElement(habit) {
             </span>
 
             <span class="habit-all__calendar">
-                ${habit.googleEventId ? `<i class="bi bi-calendar-check"></i>` : `<i class="bi bi-calendar-plus"></i> Add to Calendar`}
+                ${
+                  habit.googleEventId
+                    ? `<span class="added-to-calendar">
+                    <span><i class="bi bi-calendar-check"></i> Added to callendar </span>
+                </span>`
+                    : `<button class="add-to-callendar" data-id="${habit.id}" ><i class="bi bi-calendar-plus"></i> Add to Calendar</button>`
+                }
             </span>
+
+    
         </div>
     </div>
 
     <div class="habit-all__actions">
+        ${
+          habit.googleEventId ? `<button class="habit-all__action remove-from-calendar"  data-id="${habit.id}" ><i class="bi bi-calendar-x"></i> </button>` : ""
+        }
         <button class="habit-all__action habit-all__action--edit edit-habit-btn" 
             data-id="${habit.id}" 
             data-url="/habit/edit/${habit.id}">

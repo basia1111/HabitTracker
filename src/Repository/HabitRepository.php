@@ -40,14 +40,14 @@ class HabitRepository extends ServiceEntityRepository
     }
 
     public function queryAll($user): array
-{
-    return $this->createQueryBuilder('habits')
-        ->where('habits.user = :user')
-        ->setParameter('user', $user)
-        ->orderBy('habits.id', 'DESC')
-        ->getQuery()
-        ->getResult();
-}
+    {
+        return $this->createQueryBuilder('habits')
+            ->where('habits.user = :user')
+            ->setParameter('user', $user)
+            ->orderBy('habits.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 
 public function getAllHabits(): array
     {

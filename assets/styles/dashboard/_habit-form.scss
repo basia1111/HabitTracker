@@ -18,8 +18,7 @@
     --ring-color: #111827;
     --ring-width: 2px;
     --ring-offset: 2px;
-    box-shadow: 0 0 0 var(--ring-offset) white,
-      0 0 0 calc(var(--ring-offset) + var(--ring-width)) var(--ring-color);
+    box-shadow: 0 0 0 var(--ring-offset) white, 0 0 0 calc(var(--ring-offset) + var(--ring-width)) var(--ring-color);
   }
 }
 
@@ -74,8 +73,7 @@
     --ring-color: #111827;
     --ring-width: 2px;
     --ring-offset: 2px;
-    box-shadow: 0 0 0 var(--ring-offset) white,
-      0 0 0 calc(var(--ring-offset) + var(--ring-width)) var(--ring-color);
+    box-shadow: 0 0 0 var(--ring-offset) white, 0 0 0 calc(var(--ring-offset) + var(--ring-width)) var(--ring-color);
   }
   label {
     color: transparent;
@@ -90,47 +88,47 @@
   }
   label[for="habit_form_color_1"],
   label[for="edit_habit_form_color_1"] {
-    background-color: #a4bdfc;
+    background-color: #7986cb; /* Lavender */
   }
   label[for="habit_form_color_2"],
   label[for="edit_habit_form_color_2"] {
-    background-color: #7ae7bf;
+    background-color: #33b679; /* Sage */
   }
   label[for="habit_form_color_3"],
   label[for="edit_habit_form_color_3"] {
-    background-color: #dbadff;
+    background-color: #8e24aa; /* Grape */
   }
   label[for="habit_form_color_4"],
   label[for="edit_habit_form_color_4"] {
-    background-color: #ff887c;
+    background-color: #e67c73; /* Flamingo */
   }
   label[for="habit_form_color_5"],
   label[for="edit_habit_form_color_5"] {
-    background-color: #fbd75b;
+    background-color: #f6bf26; /* Banana */
   }
   label[for="habit_form_color_6"],
   label[for="edit_habit_form_color_6"] {
-    background-color: #ffb878;
+    background-color: #f4511e; /* Tangerine */
   }
   label[for="habit_form_color_7"],
   label[for="edit_habit_form_color_7"] {
-    background-color: #46d6db;
+    background-color: #039be5; /* Peacock */
   }
   label[for="habit_form_color_8"],
   label[for="edit_habit_form_color_8"] {
-    background-color: #e1e1e1;
+    background-color: #616161; /* Graphite */
   }
   label[for="habit_form_color_9"],
   label[for="edit_habit_form_color_9"] {
-    background-color: #5484ed;
+    background-color: #3f51b5; /* Blueberry */
   }
   label[for="habit_form_color_10"],
   label[for="edit_habit_form_color_10"] {
-    background-color: #51b749;
+    background-color: #0b8043; /* Basil */
   }
   label[for="habit_form_color_11"],
   label[for="edit_habit_form_color_11"] {
-    background-color: #dc2127;
+    background-color: #d50000; /* Tomato */
   }
 }
 
@@ -159,6 +157,5 @@ input#habit_form_hasTime:checked ~ label[for="habit_form_hasTime"] {
   --ring-color: #111827;
   --ring-width: 2px;
   --ring-offset: 2px;
-  box-shadow: 0 0 0 var(--ring-offset) white,
-    0 0 0 calc(var(--ring-offset) + var(--ring-width)) var(--ring-color);
+  box-shadow: 0 0 0 var(--ring-offset) white, 0 0 0 calc(var(--ring-offset) + var(--ring-width)) var(--ring-color);
 }

@@ -28,15 +28,20 @@
 
             <span class="habit-all__calendar">
                 {% if habit.googleEventId %}
+                <span class="added-to-calendar">
                     <i class="bi bi-calendar-check"></i>
+                </span>
                 {% else %}
-                    <i class="bi bi-calendar-plus"></i> Add to Calendar
+                    <button class="add-to-callendar" data-id="{{habit.id}}" ><i class="bi bi-calendar-plus"></i> Add to Calendar</button>
                 {% endif %}
             </span>
         </div>
     </div>
 
     <div class="habit-all__actions">
+    {% if habit.googleEventId %}
+        <button class="habit-all__action remove-from-calendar"  data-id="{{habit.id}}" ><i class="bi bi-calendar-x"></i> </button>
+    {% endif %}
         <button class="habit-all__action habit-all__action--edit edit-habit-btn" 
             data-id="{{habit.id}}" 
             data-url="/habit/edit/{{habit.id}}">

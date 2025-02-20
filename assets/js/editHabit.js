@@ -3,6 +3,7 @@ import { toggleWeekDays, toggleTimeEdit } from "./habitFormHelperFunctions/toggl
 import { showErrorMessagesEdit } from "./habitFormHelperFunctions/showErrorMessages";
 import { fetchTodayHabits, checkIfToday, updateStats } from "./habitHelperFunctions";
 import { createHabitElement } from "./createElements/createHabitElement";
+import { fetchCalendar } from "./googleCallendar/fetchEmbededCalendar";
 
 const editModal = new bootstrap.Modal(document.getElementById("editHabitModal"));
 
@@ -79,6 +80,7 @@ async function initializeEditForm(id) {
         console.log(checkIfToday(jsonData.habit));
         // Refresh today's habits if the updated habit is for today
         fetchTodayHabits();
+        if (jsonData.habit.googleEventId) fetchCalendar();
       } else {
         showErrorMessagesEdit(jsonData);
       }

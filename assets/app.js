@@ -9,6 +9,10 @@ import "./js/completeHabit";
 
 import "./js/getWeather";
 
+import "./js/googleCallendar/createEvent";
+import "./js/googleCallendar/deleteEvent";
+import "./js/googleCallendar/fetchEmbededCalendar";
+
 import { WEATHER_ICONS } from "./js/habitCategories";
 
 console.log("Bootstrap JS and CSS are loaded.");

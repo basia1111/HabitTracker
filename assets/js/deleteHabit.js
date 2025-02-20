@@ -1,6 +1,7 @@
 import * as bootstrap from "bootstrap";
 import { showErrorMessagesDelete } from "./habitFormHelperFunctions/showErrorMessages";
 import { fetchTodayHabits, updateStats } from "./habitHelperFunctions";
+import { fetchCalendar } from "./googleCallendar/fetchEmbededCalendar";
 
 // Initialize the delete modal
 const deleteModal = new bootstrap.Modal(document.getElementById("delete-habit-modal"));
@@ -64,6 +65,8 @@ async function handleDelete(id) {
       // If habit was today, refresh today’s habits
       const todayHabitElement = document.getElementById(`today__habit_${id}`);
       if (todayHabitElement) fetchTodayHabits();
+
+      if (jsonData.googleEventId) fetchCalendar();
     } else {
       showErrorMessagesDelete(jsonData);
     }
