@@ -12,6 +12,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 /**
  * Handles user registration
@@ -27,21 +28,22 @@ class RegistrationController extends AbstractController
         UserRepository $userRepository,
         UserPasswordHasherInterface $passwordHasher,
         AuthenticationUtils $authenticationUtils,
-        Security $security
+        Security $security,
+        CsrfTokenManagerInterface $csrfTokenManager 
     ): Response
     {
         // In your login controller
         if ($request->isMethod('POST')) {
             // Output CSRF debug info if enabled
-            if ($_ENV['CSRF_DEBUG'] ?? false) {
+            
                 $submittedToken = $request->request->get('_csrf_token');
-                $expectedToken = $this->csrfTokenManager->getToken('authenticate')->getValue();
+                $expectedToken = $csrfTokenManager->getToken('authenticate')->getValue();
                 
                 // Log or display error
                 error_log("Submitted CSRF: $submittedToken");
                 error_log("Expected CSRF: $expectedToken");
                 error_log("Session ID: " . session_id());
-            }
+            
         }
 
         if ($this->getUser()) {
