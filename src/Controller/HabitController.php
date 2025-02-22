@@ -212,8 +212,10 @@ class HabitController extends AbstractController
         try{
 
             $googleEventId = $habit->getGoogleEventId();
-
-            $this->googleCalendarService->removeFromCalendar($this->security->getUser(), $habit);
+            if($googleEventId){
+                $this->googleCalendarService->removeFromCalendar($this->security->getUser(), $habit);
+            }
+            
             $this->habitServiceInterface->delete($habit);
             $stats = $this->habitStatsServiceInterface->getUserHabitStats();
 
@@ -227,7 +229,7 @@ class HabitController extends AbstractController
         } catch (\Exception $e){
             return new JsonResponse([
                 'status' => 'error',
-                'message' => 'An error occurred while deleting the habit.',
+                'message' => $e->getMessage(),
             ], 500);
         }
     }
