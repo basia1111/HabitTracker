@@ -23,13 +23,13 @@ security:
         default_target_path: /
       oauth:
         resource_owners:
-          google: "/connect/google/check"
+          google: "%env(OAUTH_GOOGLE_CALLBACK_URL)%"
         login_path: /login
         use_forward: false
         failure_path: /login
         default_target_path: /
         oauth_user_provider:
-          service: App\Security\MyUserProvider
+          service: App\Security\MySecurityProvider
       logout:
         path: app_logout
         target: app_login

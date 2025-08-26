@@ -317,6 +317,7 @@ class GoogleCalendarService
             $service->calendars->get($user->getGoogleCalendarId());
             return true;
         } catch (\Exception $e) {
+            $this->logger->error('Calendar validation error: ' . $e->getMessage());
             if (str_contains($e->getMessage(), 'Not Found') || str_contains($e->getMessage(), '404')) {
 
                 $this->clearUserHabitsGoogleEvents($user);

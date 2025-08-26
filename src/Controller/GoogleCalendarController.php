@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
-class GoogleCalendarControler extends AbstractController
+class GoogleCalendarController extends AbstractController
 {
     private GoogleCalendarService $googleCalendarService;
 
@@ -124,7 +124,7 @@ class GoogleCalendarControler extends AbstractController
         return new JsonResponse([
             'success' => false,
             'error' => 'Calendar not available'
-        ], 404);
+        ], 403);
     }
 
     return new JsonResponse([

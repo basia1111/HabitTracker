@@ -1,30 +1,50 @@
-
 FROM php:8.2-apache
 
 RUN apt-get update && apt-get install -y \
-    libfreetype6-dev \
-    libjpeg62-turbo-dev \
-    libpng-dev \
-    libonig-dev \
     libzip-dev \
     zip \
     unzip \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) iconv mbstring gd pdo pdo_mysql zip \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    nodejs \
+    npm \
+    && docker-php-ext-install zip pdo pdo_mysql
 
 RUN a2enmod rewrite
 
-RUN useradd -m -u 1000 dockeruser
-
-USER dockeruser
-
-COPY --chown=dockeruser:dockeruser . /var/www/html
-
-WORKDIR /var/www/html
+# Configure PHP sessions correctly
+RUN echo "session.cookie_httponly=1" >> /usr/local/etc/php/conf.d/sessions.ini && \
+    echo "session.use_only_cookies=1" >> /usr/local/etc/php/conf.d/sessions.ini
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-RUN composer install
+WORKDIR /var/www/html
+COPY . .
 
-RUN chown -R dockeruser:dockeruser /var/www/html/var /var/www/html/vendor /var/www/html/public
+RUN echo "APP_ENV=prod" > .env
+
+# Create directories
+RUN mkdir -p var/cache var/sessions var/log
+
+# Install dependencies
+RUN composer install --no-dev --no-scripts
+
+# Install npm dependencies and build assets
+RUN npm install
+RUN npm run build
+
+# Create startup script with proper permission fixes
+RUN echo '#!/bin/bash\n\
+php bin/console doctrine:migrations:migrate --no-interaction\n\
+# Clear cache as root first\n\
+php bin/console cache:clear\n\
+# Set proper permissions\n\
+chown -R www-data:www-data var\n\
+chmod -R 777 var\n\
+# Start Apache\n\
+apache2-foreground' > /usr/local/bin/startup.sh
+
+RUN chmod +x /usr/local/bin/startup.sh
+
+ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+
+CMD ["/usr/local/bin/startup.sh"]

@@ -9,7 +9,7 @@ use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 
-class MyUserProvider implements OAuthAwareUserProviderInterface
+class MySecurityProvider implements OAuthAwareUserProviderInterface
 {
     private $entityManager;
     private $security;
@@ -62,7 +62,21 @@ class MyUserProvider implements OAuthAwareUserProviderInterface
         // First check by Google email
         $user = $userRepository->findOneBy(['googleEmail' => $googleEmail]);
         
-        if (!$user) {
+
+        if ($user) {
+            // Found user by Google email - update their tokens
+            $accessToken = $response->getAccessToken();
+            $refreshToken = $response->getRefreshToken();
+            
+            $user->setGoogleAccessToken($accessToken);
+            if ($refreshToken) {
+                $user->setGoogleRefreshToken($refreshToken);
+            }
+            
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
+        }
+        elseif (!$user) {
             // Then check by regular email
             $user = $userRepository->findOneBy(['email' => $googleEmail]);
             
