@@ -1,6 +1,11 @@
 # Habit Tracker - PHP Symfony, Google Calendar Integration
 This is a **Habit Tracker** web application built using **PHP Symfony**, **JavaScript**, **MySQL**, **Bootstrap**, **SCSS**, **Docker**, and integrated with **Google Calendar** and **Weather Data**. The app allows users to create and manage their daily habits while syncing them with Google Calendar, as well as view real-time weather information based on their geolocation.
 
+## Demo
+
+https://github.com/user-attachments/assets/3089748d-359f-4d89-836e-af5ab43ea21a
+
+<br>
 <table>
   <tr>
     <td><img src="https://github.com/user-attachments/assets/6fc0157b-cb75-475b-b442-fcb1331e430a" alt="Screenshot 1" width="100%"></td>
@@ -70,48 +75,6 @@ This is a **Habit Tracker** web application built using **PHP Symfony**, **JavaS
 - **Docker:**
   - Docker is used for containerization, ensuring consistent development and production environments.
 
-## Installation
-
-1. **Clone the Repository:**
-   ```
-   git clone https://github.com/your-repo/habit-tracker.git
-   cd habit-tracker
-   ```
-
-2. **Set up Docker:**
-   - Build and start the Docker containers:
-   ```
-   docker-compose up --build
-   ```
-
-3. **Install Dependencies:**
-   - Install PHP dependencies:
-   ```
-   composer install
-   ```
-   - Install frontend dependencies:
-   ```
-   npm install
-   ```
-
-4. **Set up Environment Variables:**
-   - Copy the `.env.example` file to `.env`:
-   ```
-   cp .env.example .env
-   ```
-   - Set up your **Google API credentials**, **OpenWeather API key**, and **Geolocation-DB API key** in the `.env` file.
-
-5. **Create the Database:**
-   - Run migrations to create the necessary database tables:
-   ```
-   php bin/console doctrine:migrations:migrate
-   ```
-
-6. **Access the Application:**
-   - Open your browser and visit:
-   ```
-   http://localhost:8080
-   ```
 
 ## Contributing
 
